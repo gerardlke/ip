@@ -1,3 +1,5 @@
+import java.util.Scanner;
+
 public class Finn {
     public static void main(String[] args) {
         String banner = " ____ ___ _   _ _   _ \n"
@@ -10,12 +12,28 @@ public class Finn {
         String opening = banner + breakline;
         System.out.println(opening);
 
-        String greeting = "Hello! I'm Finn.\nWhat can I do for you?\n" + breakline;
+        String greeting = "Hello! I'm Finn.\nYour personal AI assistant!\n" + breakline;
         System.out.println(greeting);
 
         // TODO
+        Scanner scanner = new Scanner(System.in);
 
-        String exit = "Bye. Hope to see you again soon!\n" + breakline;
+        while (true) {
+            System.out.print("What can I do for you? ");
+            String command = scanner.nextLine();
+
+            System.out.println(breakline);
+
+            if (command.equals("bye")) {
+                break;
+            }
+
+            System.out.println("Executing: " + command);
+
+            System.out.println(breakline);
+        }
+
+        String exit = "Bye. Hope to see you again soon!";
         System.out.println(exit);
     }
 }
