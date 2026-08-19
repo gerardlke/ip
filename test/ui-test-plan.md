@@ -1,6 +1,6 @@
 # Finn UI test plan
 
-Run this plan with `powershell -NoProfile -ExecutionPolicy Bypass -File .codex/skills/test-ui/scripts/run-ui-tests.ps1`. Expected-output blocks contain the complete program output; the prompt and divider appear on the same line because the application uses `print` for the prompt.
+Run this plan with `powershell -NoProfile -ExecutionPolicy Bypass -File .codex/skills/test-ui/scripts/run-ui-tests.ps1`. Expected-output blocks contain the complete program output; the prompt and divider appear on the same line because the application uses `print` for the prompt. A `␠` represents one required trailing space.
 
 ## Test: Todo lifecycle
 
@@ -19,7 +19,7 @@ bye
 
 Expected output:
 ```text
- ____ ___ _   _ _   _ 
+ ____ ___ _   _ _   _␠
 |  __|_ _| \ | | \ | |
 | |_  | ||  \| |  \| |
 |  _| | || |\  | |\  |
@@ -86,7 +86,7 @@ bye
 
 Expected output:
 ```text
- ____ ___ _   _ _   _ 
+ ____ ___ _   _ _   _␠
 |  __|_ _| \ | | \ | |
 | |_  | ||  \| |  \| |
 |  _| | || |\  | |\  |
@@ -116,6 +116,63 @@ What can I do for you? _________________________________________________________
 Here are the tasks in your list:
 1.[D][ ] do homework (by: no idea :-p)
 2.[E][ ] project meeting (from: Mon 2pm, to: 4pm)
+____________________________________________________________
+
+What can I do for you? ____________________________________________________________
+
+Bye. Hope to see you again soon!
+```
+
+## Test: Invalid command feedback
+
+Aim: Verify that malformed task commands, an invalid task index, and an unknown command show their current guidance without adding tasks.
+
+Inputs:
+```text
+todo
+deadline return book
+event project meeting /from Mon 2pm
+mark 1
+remind me
+bye
+```
+
+Expected output:
+```text
+ ____ ___ _   _ _   _␠
+|  __|_ _| \ | | \ | |
+| |_  | ||  \| |  \| |
+|  _| | || |\  | |\  |
+|_|  |___|_| \_|_| \_|
+____________________________________________________________
+
+Hello! I'm Finn.
+Your personal AI assistant!
+____________________________________________________________
+
+What can I do for you? ____________________________________________________________
+
+Sorry! Please follow the format: todo DESCRIPTION
+____________________________________________________________
+
+What can I do for you? ____________________________________________________________
+
+Sorry! Please follow the format: deadline DESCRIPTION /by DATE
+____________________________________________________________
+
+What can I do for you? ____________________________________________________________
+
+Sorry! Please follow the format: event DESCRIPTION /from START /to END
+____________________________________________________________
+
+What can I do for you? ____________________________________________________________
+
+Sorry! Invalid task index!
+____________________________________________________________
+
+What can I do for you? ____________________________________________________________
+
+Sorry! Unknown task type: remind
 ____________________________________________________________
 
 What can I do for you? ____________________________________________________________

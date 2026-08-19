@@ -37,7 +37,8 @@ try {
     foreach ($test in $tests) {
         $name = $test.Groups['name'].Value.Trim()
         $inputs = $test.Groups['inputs'].Value
-        $expected = Normalize-Output $test.Groups['expected'].Value
+        # The plan uses ␠ to represent a required trailing space without adding whitespace to Markdown lines.
+        $expected = (Normalize-Output $test.Groups['expected'].Value).Replace("␠", " ")
         $actual = Normalize-Output (($inputs | & java -cp $classesDirectory Finn 2>&1 | Out-String))
 
         Write-Host "`n=== $name ==="
