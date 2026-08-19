@@ -22,4 +22,9 @@ public class Task {
     public void markUndone() {
         this.completed = false;
     }
+
+    @Override
+    public String toString() {
+        return String.format("[%s] %s", this.completed ? "X" : " ", this.name);
+    }
 }
