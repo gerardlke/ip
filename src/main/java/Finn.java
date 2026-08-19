@@ -46,11 +46,11 @@ public class Finn {
                     break;
 
                 case "mark":
-                    markTask(details);
+                    markTask(details, true);
                     break;
                     
                 case "unmark":
-                    unmarkTask(details);
+                    markTask(details, false);
                     break;
 
                 case "todo":
@@ -66,7 +66,7 @@ public class Finn {
                     break;
 
                 default:
-                    System.out.println("Unknown task type: " + command);
+                    System.out.println("Sorry! Unknown task type: " + command);
                     System.out.println(breakline);
             }
         }
@@ -81,23 +81,26 @@ public class Finn {
         System.out.println(breakline);
     }
 
-    private void markTask(String details) {
+    private void markTask(String details, Boolean completion) {
         int index = Integer.parseInt(details) - 1;
-        Task task = tasks.get(index);
-        task.markDone();
-        System.out.println(
-            String.format("Nice! I've marked this task as done:\n%s", task)
-        );
-        System.out.println(breakline);
-    }
+        if (index >= tasks.size()) {
+            System.out.println("Sorry! Invalid task index!");
+            System.out.println(breakline);
+            return;
+        }
 
-    private void unmarkTask(String details) {
-        int index = Integer.parseInt(details) - 1;
         Task task = tasks.get(index);
-        task.markUndone();
-        System.out.println(
-            String.format("OK, I've marked this task as not done yet:\n%s", task)
-        );
+        if (completion) {
+            task.markDone();
+            System.out.println(
+                String.format("Nice! I've marked this task as done:\n%s", task)
+            );
+        } else {
+            task.markUndone();
+            System.out.println(
+                String.format("OK, I've marked this task as not done yet:\n%s", task)
+            );
+        }
         System.out.println(breakline);
     }
 
@@ -108,6 +111,11 @@ public class Finn {
     }
 
     private void addTodo(String details) {
+        if (details.length() < 1) {
+            System.out.println("Sorry! Please follow the format: todo DESCRIPTION");
+            System.out.println(breakline);
+            return;
+        }
         addTask(new Todo(details));
     }
 
@@ -115,10 +123,10 @@ public class Finn {
         String[] parts = details.split("\\s+/by\\s+", 2);
 
         if (parts.length < 2) {
-            System.out.println("Format: deadline DESCRIPTION /by DATE");
+            System.out.println("Sorry! Please follow the format: deadline DESCRIPTION /by DATE");
+            System.out.println(breakline);
             return;
         }
-
         addTask(new Deadline(parts[0], parts[1]));
     }
 
@@ -126,14 +134,16 @@ public class Finn {
         String[] fromParts = details.split("\\s+/from\\s+", 2);
 
         if (fromParts.length < 2) {
-            System.out.println("Format: event DESCRIPTION /from START /to END");
+            System.out.println("Sorry! Please follow the format: event DESCRIPTION /from START /to END");
+            System.out.println(breakline);
             return;
         }
 
         String[] toParts = fromParts[1].split("\\s+/to\\s+", 2);
 
         if (toParts.length < 2) {
-            System.out.println("Format: event DESCRIPTION /from START /to END");
+            System.out.println("Sorry! Please follow the format: event DESCRIPTION /from START /to END");
+            System.out.println(breakline);
             return;
         }
 
