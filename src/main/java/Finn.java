@@ -53,6 +53,10 @@ public class Finn {
                     markTask(details, false);
                     break;
 
+                case "delete":
+                    deleteTask(details);
+                    break;
+
                 case "todo":
                     addTodo(details);
                     break;
@@ -101,6 +105,19 @@ public class Finn {
                 String.format("OK, I've marked this task as not done yet:\n%s", task)
             );
         }
+        System.out.println(breakline);
+    }
+
+    private void deleteTask(String details) {
+        int index = Integer.parseInt(details) - 1;
+        if (index >= tasks.size()) {
+            System.out.println("Sorry! Invalid task index!");
+            System.out.println(breakline);
+            return;
+        }
+
+        Task task = tasks.remove(index);
+        System.out.println(String.format("Oops! I've removed this task:\n   %s\nNow you have %d task(s) in the list.", task, tasks.size()));
         System.out.println(breakline);
     }
 
