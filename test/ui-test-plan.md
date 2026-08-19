@@ -179,3 +179,67 @@ What can I do for you? _________________________________________________________
 
 Bye. Hope to see you again soon!
 ```
+
+## Test: Delete task lifecycle
+
+Aim: Verify that deleting a task removes it, updates the task count and numbering, and rejects an index beyond the list.
+
+Inputs:
+```text
+todo first task
+todo second task
+delete 1
+list
+delete 5
+bye
+```
+
+Expected output:
+```text
+ ____ ___ _   _ _   _<SP>
+|  __|_ _| \ | | \ | |
+| |_  | ||  \| |  \| |
+|  _| | || |\  | |\  |
+|_|  |___|_| \_|_| \_|
+____________________________________________________________
+
+Hello! I'm Finn.
+Your personal AI assistant!
+____________________________________________________________
+
+What can I do for you? ____________________________________________________________
+
+Got it. I've added this task:
+   [T][ ] first task
+Now you have 1 task(s) in the list.
+____________________________________________________________
+
+What can I do for you? ____________________________________________________________
+
+Got it. I've added this task:
+   [T][ ] second task
+Now you have 2 task(s) in the list.
+____________________________________________________________
+
+What can I do for you? ____________________________________________________________
+
+Oops! I've removed this task:
+   [T][ ] first task
+Now you have 1 task(s) in the list.
+____________________________________________________________
+
+What can I do for you? ____________________________________________________________
+
+Here are the tasks in your list:
+1.[T][ ] second task
+____________________________________________________________
+
+What can I do for you? ____________________________________________________________
+
+Sorry! Invalid task index!
+____________________________________________________________
+
+What can I do for you? ____________________________________________________________
+
+Bye. Hope to see you again soon!
+```
