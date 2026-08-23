@@ -78,8 +78,8 @@ Aim: Verify that deadline and event date/time text is preserved exactly and each
 
 Inputs:
 ```text
-deadline do homework /by no idea :-p
-event project meeting /from Mon 2pm /to 4pm
+deadline do homework /by 2019-10-15
+event project meeting /from 2019-10-16 /to 2019-10-17
 list
 bye
 ```
@@ -100,22 +100,22 @@ ____________________________________________________________
 What can I do for you? ____________________________________________________________
 
 Got it. I've added this task:
-   [D][ ] do homework (by: no idea :-p)
+   [D][ ] do homework (by: Oct 15 2019)
 Now you have 1 task(s) in the list.
 ____________________________________________________________
 
 What can I do for you? ____________________________________________________________
 
 Got it. I've added this task:
-   [E][ ] project meeting (from: Mon 2pm, to: 4pm)
+   [E][ ] project meeting (from: Oct 16 2019, to: Oct 17 2019)
 Now you have 2 task(s) in the list.
 ____________________________________________________________
 
 What can I do for you? ____________________________________________________________
 
 Here are the tasks in your list:
-1.[D][ ] do homework (by: no idea :-p)
-2.[E][ ] project meeting (from: Mon 2pm, to: 4pm)
+1.[D][ ] do homework (by: Oct 15 2019)
+2.[E][ ] project meeting (from: Oct 16 2019, to: Oct 17 2019)
 ____________________________________________________________
 
 What can I do for you? ____________________________________________________________
@@ -254,8 +254,9 @@ T | 2 | cmVhZCBib29r
 X | 0 | cmVhZCBib29r
 T | 0 | not-valid-base64!
 T | 0 | cmVhZCBib29r
-D | 1 | cmV0dXJuIGJvb2s= | SnVuZSA2dGg=
-E | 0 | cHJvamVjdCBtZWV0aW5n | QXVnIDZ0aCAycG0= | QXVnIDZ0aCA0cG0=
+D | 1 | cmV0dXJuIGJvb2s= | MjAxOS0wNi0wNg==
+E | 0 | cHJvamVjdCBtZWV0aW5n | MjAxOS0wOC0wNg== | MjAxOS0wOC0wNw==
+E | 0 | b3V0IG9mIG9yZGVy | MjAxOS0wOC0wNw== | MjAxOS0wOC0wNg==
 ```
 
 Inputs:
@@ -281,8 +282,8 @@ What can I do for you? _________________________________________________________
 
 Here are the tasks in your list:
 1.[T][ ] read book
-2.[D][X] return book (by: June 6th)
-3.[E][ ] project meeting (from: Aug 6th 2pm, to: Aug 6th 4pm)
+2.[D][X] return book (by: Jun 06 2019)
+3.[E][ ] project meeting (from: Aug 06 2019, to: Aug 07 2019)
 ____________________________________________________________
 
 What can I do for you? ____________________________________________________________
@@ -302,7 +303,10 @@ mark zero
 mark 0
 delete -1
 deadline /by Friday
+deadline study /by 2019-02-29
 event meeting /from /to 4pm
+event meeting /from 2019-10-16 /to 2019-02-29
+event meeting /from 2019-10-17 /to 2019-10-16
 list extra
 bye later
 bye
@@ -355,7 +359,22 @@ ____________________________________________________________
 
 What can I do for you? ____________________________________________________________
 
+Sorry! Please use a valid date in the format yyyy-MM-dd.
+____________________________________________________________
+
+What can I do for you? ____________________________________________________________
+
 Sorry! Please follow the format: event DESCRIPTION /from START /to END
+____________________________________________________________
+
+What can I do for you? ____________________________________________________________
+
+Sorry! Please use valid dates in the format yyyy-MM-dd.
+____________________________________________________________
+
+What can I do for you? ____________________________________________________________
+
+Sorry! The event end date must not be before its start date.
 ____________________________________________________________
 
 What can I do for you? ____________________________________________________________
