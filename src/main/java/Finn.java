@@ -1,4 +1,6 @@
 import java.io.IOException;
+import java.time.DateTimeException;
+import java.time.LocalDate;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
@@ -136,18 +138,18 @@ public class Finn {
                 if (parts.length != 4) {
                     return null;
                 }
-                task = new Deadline(decode(parts[2]), decode(parts[3]));
+                task = new Deadline(decode(parts[2]), LocalDate.parse(decode(parts[3])));
                 break;
             case "E":
                 if (parts.length != 5) {
                     return null;
                 }
-                task = new Event(decode(parts[2]), decode(parts[3]), decode(parts[4]));
+                task = new Event(decode(parts[2]), LocalDate.parse(decode(parts[3])), LocalDate.parse(decode(parts[4])));
                 break;
             default:
                 return null;
             }
-        } catch (IllegalArgumentException e) {
+        } catch (IllegalArgumentException | DateTimeException e) {
             return null;
         }
 
@@ -197,11 +199,12 @@ public class Finn {
         }
         if (task instanceof Deadline) {
             Deadline deadline = (Deadline) task;
-            return String.format("D | %s | %s | %s", status, encode(task.getName()), encode(deadline.getDeadline()));
+            return String.format("D | %s | %s | %s", status, encode(task.getName()), encode(deadline.getDeadline().toString()));
         }
         if (task instanceof Event) {
             Event event = (Event) task;
-            return String.format("E | %s | %s | %s | %s", status, encode(task.getName()), encode(event.getStart()), encode(event.getEnd()));
+            return String.format("E | %s | %s | %s | %s", status, encode(task.getName()),
+                    encode(event.getStart().toString()), encode(event.getEnd().toString()));
         }
         return null;
     }
@@ -273,7 +276,11 @@ public class Finn {
             System.out.println(breakline);
             return;
         }
-        addTask(new Deadline(parts[0], parts[1]));
+        try {
+            addTask(new Deadline(parts[0], LocalDate.parse(parts[1])));
+        } catch (DateTimeException e) {
+            printError("Sorry! Please use a valid date in the format yyyy-MM-dd.");
+        }
     }
 
     private void addEvent(String details) {
@@ -293,7 +300,17 @@ public class Finn {
             return;
         }
 
-        addTask(new Event(fromParts[0], toParts[0], toParts[1]));
+        try {
+            LocalDate start = LocalDate.parse(toParts[0]);
+            LocalDate end = LocalDate.parse(toParts[1]);
+            if (end.isBefore(start)) {
+                printError("Sorry! The event end date must not be before its start date.");
+                return;
+            }
+            addTask(new Event(fromParts[0], start, end));
+        } catch (DateTimeException e) {
+            printError("Sorry! Please use valid dates in the format yyyy-MM-dd.");
+        }
     }
 
     /** Returns a zero-based valid task index, or -1 after printing an error. */
