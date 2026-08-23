@@ -1,3 +1,12 @@
+package finn;
+
+import finn.command.Command;
+import finn.storage.Storage;
+import finn.parser.Parser;
+import finn.task.TaskList;
+import finn.ui.Ui;
+
+
 public class Finn {
     private final Storage storage;
     private final TaskList tasks;
