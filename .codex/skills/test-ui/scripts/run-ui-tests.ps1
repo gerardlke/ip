@@ -27,19 +27,26 @@ try {
     }
 
     $plan = Get-Content -Raw -LiteralPath $PlanPath
-    $testPattern = '(?ms)^## Test: (?<name>.+?)\r?$\s*Aim:\s*(?<aim>.+?)\r?\n\s*Inputs:\s*```text\r?\n(?<inputs>.*?)\r?\n```\s*Expected output:\s*```text\r?\n(?<expected>.*?)\r?\n```'
+    $testPattern = '(?ms)^## Test: (?<name>.+?)\r?$\s*Aim:\s*(?<aim>.+?)(?:\r?\n\s*Saved tasks:\s*```text\r?\n(?<saved>.*?)\r?\n```)?\s*Inputs:\s*```text\r?\n(?<inputs>.*?)\r?\n```\s*Expected output:\s*```text\r?\n(?<expected>.*?)\r?\n```'
     $tests = [regex]::Matches($plan, $testPattern)
 
     if ($tests.Count -eq 0) {
         throw "No tests matched the required format in $PlanPath."
     }
 
+    $testNumber = 0
     foreach ($test in $tests) {
+        $testNumber++
         $name = $test.Groups['name'].Value.Trim()
         $inputs = $test.Groups['inputs'].Value
+        $storagePath = Join-Path $classesDirectory "storage-$testNumber.txt"
+        $savedTasks = $test.Groups['saved'].Value
+        if ($savedTasks) {
+            [System.IO.File]::WriteAllText($storagePath, $savedTasks)
+        }
         # The plan uses <SP> to represent a required trailing space without adding whitespace to Markdown lines.
         $expected = (Normalize-Output $test.Groups['expected'].Value).Replace("<SP>", " ").Replace("␠", " ")
-        $actual = Normalize-Output (($inputs | & java -cp $classesDirectory Finn 2>&1 | Out-String))
+        $actual = Normalize-Output (($inputs | & java "-Dfinn.storage.path=$storagePath" -cp $classesDirectory Finn 2>&1 | Out-String))
 
         Write-Host "`n=== $name ==="
         Write-Host "Aim: $($test.Groups['aim'].Value.Trim())"
@@ -58,6 +65,10 @@ try {
         }
 
         Write-Host "PASSED: $name"
+
+        if (Test-Path -LiteralPath $storagePath) {
+            Remove-Item -LiteralPath $storagePath -Force
+        }
     }
 
     Write-Host "`nAll $($tests.Count) UI test case(s) passed."

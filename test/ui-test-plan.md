@@ -243,3 +243,182 @@ What can I do for you? _________________________________________________________
 
 Bye. Hope to see you again soon!
 ```
+
+## Test: Load saved tasks
+
+Aim: Verify that Finn loads valid todo, deadline, and event records while safely ignoring malformed saved records.
+
+Saved tasks:
+```text
+T | 2 | cmVhZCBib29r
+X | 0 | cmVhZCBib29r
+T | 0 | not-valid-base64!
+T | 0 | cmVhZCBib29r
+D | 1 | cmV0dXJuIGJvb2s= | SnVuZSA2dGg=
+E | 0 | cHJvamVjdCBtZWV0aW5n | QXVnIDZ0aCAycG0= | QXVnIDZ0aCA0cG0=
+```
+
+Inputs:
+```text
+list
+bye
+```
+
+Expected output:
+```text
+ ____ ___ _   _ _   _<SP>
+|  __|_ _| \ | | \ | |
+| |_  | ||  \| |  \| |
+|  _| | || |\  | |\  |
+|_|  |___|_| \_|_| \_|
+____________________________________________________________
+
+Hello! I'm Finn.
+Your personal AI assistant!
+____________________________________________________________
+
+What can I do for you? ____________________________________________________________
+
+Here are the tasks in your list:
+1.[T][ ] read book
+2.[D][X] return book (by: June 6th)
+3.[E][ ] project meeting (from: Aug 6th 2pm, to: Aug 6th 4pm)
+____________________________________________________________
+
+What can I do for you? ____________________________________________________________
+
+Bye. Hope to see you again soon!
+```
+
+## Test: Invalid input edge cases
+
+Aim: Verify that blank input, invalid task indexes, incomplete task details, and commands with unexpected arguments show guidance without terminating Finn.
+
+Inputs:
+```text
+
+todo one task
+mark zero
+mark 0
+delete -1
+deadline /by Friday
+event meeting /from /to 4pm
+list extra
+bye later
+bye
+```
+
+Expected output:
+```text
+ ____ ___ _   _ _   _<SP>
+|  __|_ _| \ | | \ | |
+| |_  | ||  \| |  \| |
+|  _| | || |\  | |\  |
+|_|  |___|_| \_|_| \_|
+____________________________________________________________
+
+Hello! I'm Finn.
+Your personal AI assistant!
+____________________________________________________________
+
+What can I do for you? ____________________________________________________________
+
+Sorry! Please enter a command.
+____________________________________________________________
+
+What can I do for you? ____________________________________________________________
+
+Got it. I've added this task:
+   [T][ ] one task
+Now you have 1 task(s) in the list.
+____________________________________________________________
+
+What can I do for you? ____________________________________________________________
+
+Sorry! Invalid task index!
+____________________________________________________________
+
+What can I do for you? ____________________________________________________________
+
+Sorry! Invalid task index!
+____________________________________________________________
+
+What can I do for you? ____________________________________________________________
+
+Sorry! Invalid task index!
+____________________________________________________________
+
+What can I do for you? ____________________________________________________________
+
+Sorry! Please follow the format: deadline DESCRIPTION /by DATE
+____________________________________________________________
+
+What can I do for you? ____________________________________________________________
+
+Sorry! Please follow the format: event DESCRIPTION /from START /to END
+____________________________________________________________
+
+What can I do for you? ____________________________________________________________
+
+Sorry! Please follow the format: list
+____________________________________________________________
+
+What can I do for you? ____________________________________________________________
+
+Sorry! Please follow the format: bye
+____________________________________________________________
+
+What can I do for you? ____________________________________________________________
+
+Bye. Hope to see you again soon!
+```
+
+## Test: Save changed task list
+
+Aim: Verify that task-list changes can be completed without changing the existing console feedback.
+
+Inputs:
+```text
+todo save this task
+mark 1
+delete 1
+bye
+```
+
+Expected output:
+```text
+ ____ ___ _   _ _   _<SP>
+|  __|_ _| \ | | \ | |
+| |_  | ||  \| |  \| |
+|  _| | || |\  | |\  |
+|_|  |___|_| \_|_| \_|
+____________________________________________________________
+
+Hello! I'm Finn.
+Your personal AI assistant!
+____________________________________________________________
+
+What can I do for you? ____________________________________________________________
+
+Got it. I've added this task:
+   [T][ ] save this task
+Now you have 1 task(s) in the list.
+____________________________________________________________
+
+What can I do for you? ____________________________________________________________
+
+Nice! I've marked this task as done:
+[T][X] save this task
+____________________________________________________________
+
+What can I do for you? ____________________________________________________________
+
+Oops! I've removed this task:
+   [T][X] save this task
+Now you have 0 task(s) in the list.
+____________________________________________________________
+
+What can I do for you? ____________________________________________________________
+
+Bye. Hope to see you again soon!
+```
