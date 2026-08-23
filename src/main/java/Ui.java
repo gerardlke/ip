@@ -44,7 +44,7 @@ public class Ui {
 
     /** Shows confirmation that a task was added. */
     public void showTaskAdded(Task task, int taskCount) {
-        System.out.println(String.format("Got it. I've added this task:\n   %s\nNow you have %d task(s) in the list.", task, taskCount));
+        System.out.println(String.format("Got it. I've added this task:\n    %s\nNow you have %d task(s) in the list.", task, taskCount));
         System.out.println(BREAKLINE);
     }
 
