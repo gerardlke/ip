@@ -10,6 +10,9 @@ public class Event extends Task {
 
     public Event(String name, LocalDate start, LocalDate end) {
         super(name);
+        if (start == null || end == null || end.isBefore(start)) {
+            throw new IllegalArgumentException("Event end date must not be before its start date.");
+        }
         this.start = start;
         this.end = end;
     }
