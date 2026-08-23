@@ -15,9 +15,11 @@ list
 unmark 1
 list
 bye
+
 ```
 
 Expected output:
+
 ```text
  ____ ___ _   _ _   _␠
 |  __|_ _| \ | | \ | |
@@ -70,6 +72,7 @@ ____________________________________________________________
 What can I do for you? ____________________________________________________________
 
 Bye. Hope to see you again soon!
+
 ```
 
 ## Test: Deadline and event details
@@ -77,14 +80,17 @@ Bye. Hope to see you again soon!
 Aim: Verify that deadline and event date/time text is preserved exactly and each task displays its type-specific details.
 
 Inputs:
+
 ```text
 deadline do homework /by 2019-10-15
 event project meeting /from 2019-10-16 /to 2019-10-17
 list
 bye
+
 ```
 
 Expected output:
+
 ```text
  ____ ___ _   _ _   _␠
 |  __|_ _| \ | | \ | |
@@ -121,6 +127,7 @@ ____________________________________________________________
 What can I do for you? ____________________________________________________________
 
 Bye. Hope to see you again soon!
+
 ```
 
 ## Test: Invalid command feedback
@@ -128,6 +135,7 @@ Bye. Hope to see you again soon!
 Aim: Verify that malformed task commands, an invalid task index, and an unknown command show their current guidance without adding tasks.
 
 Inputs:
+
 ```text
 todo
 deadline return book
@@ -135,9 +143,11 @@ event project meeting /from Mon 2pm
 mark 1
 remind me
 bye
+
 ```
 
 Expected output:
+
 ```text
  ____ ___ _   _ _   _␠
 |  __|_ _| \ | | \ | |
@@ -178,6 +188,7 @@ ____________________________________________________________
 What can I do for you? ____________________________________________________________
 
 Bye. Hope to see you again soon!
+
 ```
 
 ## Test: Delete task lifecycle
@@ -185,6 +196,7 @@ Bye. Hope to see you again soon!
 Aim: Verify that deleting a task removes it, updates the task count and numbering, and rejects an index beyond the list.
 
 Inputs:
+
 ```text
 todo first task
 todo second task
@@ -192,11 +204,13 @@ delete 1
 list
 delete 5
 bye
+
 ```
 
 Expected output:
+
 ```text
- ____ ___ _   _ _   _<SP>
+ ____ ___ _   _ _   _␠
 |  __|_ _| \ | | \ | |
 | |_  | ||  \| |  \| |
 |  _| | || |\  | |\  |
@@ -242,6 +256,7 @@ ____________________________________________________________
 What can I do for you? ____________________________________________________________
 
 Bye. Hope to see you again soon!
+
 ```
 
 ## Test: Load saved tasks
@@ -249,6 +264,7 @@ Bye. Hope to see you again soon!
 Aim: Verify that Finn loads valid todo, deadline, and event records while safely ignoring malformed saved records.
 
 Saved tasks:
+
 ```text
 T | 2 | cmVhZCBib29r
 X | 0 | cmVhZCBib29r
@@ -257,17 +273,21 @@ T | 0 | cmVhZCBib29r
 D | 1 | cmV0dXJuIGJvb2s= | MjAxOS0wNi0wNg==
 E | 0 | cHJvamVjdCBtZWV0aW5n | MjAxOS0wOC0wNg== | MjAxOS0wOC0wNw==
 E | 0 | b3V0IG9mIG9yZGVy | MjAxOS0wOC0wNw== | MjAxOS0wOC0wNg==
+
 ```
 
 Inputs:
+
 ```text
 list
 bye
+
 ```
 
 Expected output:
+
 ```text
- ____ ___ _   _ _   _<SP>
+ ____ ___ _   _ _   _␠
 |  __|_ _| \ | | \ | |
 | |_  | ||  \| |  \| |
 |  _| | || |\  | |\  |
@@ -289,6 +309,7 @@ ____________________________________________________________
 What can I do for you? ____________________________________________________________
 
 Bye. Hope to see you again soon!
+
 ```
 
 ## Test: Invalid input edge cases
@@ -296,6 +317,7 @@ Bye. Hope to see you again soon!
 Aim: Verify that blank input, invalid task indexes, incomplete task details, and commands with unexpected arguments show guidance without terminating Finn.
 
 Inputs:
+
 ```text
 
 todo one task
@@ -310,11 +332,13 @@ event meeting /from 2019-10-17 /to 2019-10-16
 list extra
 bye later
 bye
+
 ```
 
 Expected output:
+
 ```text
- ____ ___ _   _ _   _<SP>
+ ____ ___ _   _ _   _␠
 |  __|_ _| \ | | \ | |
 | |_  | ||  \| |  \| |
 |  _| | || |\  | |\  |
@@ -390,6 +414,7 @@ ____________________________________________________________
 What can I do for you? ____________________________________________________________
 
 Bye. Hope to see you again soon!
+
 ```
 
 ## Test: Save changed task list
@@ -397,16 +422,19 @@ Bye. Hope to see you again soon!
 Aim: Verify that task-list changes can be completed without changing the existing console feedback.
 
 Inputs:
+
 ```text
 todo save this task
 mark 1
 delete 1
 bye
+
 ```
 
 Expected output:
+
 ```text
- ____ ___ _   _ _   _<SP>
+ ____ ___ _   _ _   _␠
 |  __|_ _| \ | | \ | |
 | |_  | ||  \| |  \| |
 |  _| | || |\  | |\  |
@@ -440,4 +468,5 @@ ____________________________________________________________
 What can I do for you? ____________________________________________________________
 
 Bye. Hope to see you again soon!
+
 ```
