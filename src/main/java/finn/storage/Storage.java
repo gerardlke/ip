@@ -1,3 +1,7 @@
+package finn.storage;
+
+import finn.task.*;
+
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -7,6 +11,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Base64;
 import java.util.List;
+
 
 /**
  * Handles loading and saving tasks from/to the storage file.

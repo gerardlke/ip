@@ -1,4 +1,9 @@
+package finn.ui;
+
+import finn.task.*;
+
 import java.util.Scanner;
+
 
 /**
  * Handles all console input and output for Finn.
@@ -51,7 +56,7 @@ public class Ui {
     /** Shows confirmation that a task's completion state changed. */
     public void showTaskMarked(Task task, boolean completed) {
         String message = completed
-                ? String.format("Nice! I've marked this task as done:\n%s", task)
+                ? String.format("Nice! I've marked this task as done:\n    %s", task)
                 : String.format("OK, I've marked this task as not done yet:\n    %s", task);
         System.out.println(message);
         System.out.println(BREAKLINE);

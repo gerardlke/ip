@@ -1,3 +1,5 @@
+package finn.exception;
+
 /**
  * Indicates that a user command cannot be parsed.
  */

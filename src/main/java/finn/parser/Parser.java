@@ -1,5 +1,12 @@
+package finn.parser;
+
+import finn.command.*;
+import finn.exception.ParserException;
+import finn.task.*;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
+
 
 public class Parser {
 
