@@ -12,6 +12,7 @@ public class Ui {
     private static final String BREAKLINE = "____________________________________________________________\n";
     private final Scanner scanner;
 
+    /** Creates a Ui that reads user commands from standard input. */
     public Ui() {
         scanner = new Scanner(System.in);
     }

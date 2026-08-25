@@ -8,8 +8,19 @@ import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
 
+/**
+ * Parses raw user input into executable {@link Command} objects.
+ */
 public class Parser {
 
+    /**
+     * Parses one line of user input into a {@link Command}.
+     *
+     * @param fullInput The raw command line entered by the user.
+     * @return The Command corresponding to the input.
+     * @throws ParserException If the input is empty, uses an unknown command word,
+     *         or does not follow the expected format for its command word.
+     */
     public static Command parse(String fullInput) throws ParserException {
         if (fullInput == null || fullInput.trim().isEmpty()) {
             throw new ParserException("Sorry! Please enter a command.");
@@ -55,12 +66,27 @@ public class Parser {
         }
     }
 
+    /**
+     * Ensures a command that takes no arguments was not given any.
+     *
+     * @param commandWord The command word, used in the error message if validation fails.
+     * @param details The argument text following the command word.
+     * @throws ParserException If {@code details} is non-empty.
+     */
     private static void requireNoDetails(String commandWord, String details) throws ParserException {
         if (!details.isEmpty()) {
             throw new ParserException("Sorry! Please follow the format: " + commandWord);
         }
     }
 
+    /**
+     * Parses a one-based task index from user input into a zero-based index.
+     *
+     * @param details The raw index text supplied by the user.
+     * @return The zero-based index.
+     * @throws ParserException If {@code details} is not a valid non-negative integer
+     *         after conversion (i.e. the one-based input is not a positive integer).
+     */
     private static int parseIndex(String details) throws ParserException {
         try {
             int index = Integer.parseInt(details) - 1;
@@ -73,6 +99,13 @@ public class Parser {
         }
     }
 
+    /**
+     * Parses the arguments of a {@code todo} command into a {@link Todo} task.
+     *
+     * @param details The task description supplied by the user.
+     * @return The parsed Todo task.
+     * @throws ParserException If the description is empty.
+     */
     private static Task parseTodo(String details) throws ParserException {
         if (details.isEmpty()) {
             throw new ParserException("Sorry! Please follow the format: todo DESCRIPTION");
@@ -80,6 +113,14 @@ public class Parser {
         return new Todo(details);
     }
 
+    /**
+     * Parses the arguments of a {@code deadline} command into a {@link Deadline} task.
+     *
+     * @param details The task description and date, in the form {@code DESCRIPTION /by DATE}.
+     * @return The parsed Deadline task.
+     * @throws ParserException If the description or date is missing, or the date
+     *         is not in {@code yyyy-MM-dd} format.
+     */
     private static Task parseDeadline(String details) throws ParserException {
         String[] parts = details.split(" /by ", 2);
         if (parts.length < 2 || parts[0].isEmpty() || parts[1].isEmpty()) {
@@ -93,6 +134,15 @@ public class Parser {
         }
     }
 
+    /**
+     * Parses the arguments of an {@code event} command into an {@link Event} task.
+     *
+     * @param details The task description and dates, in the form
+     *         {@code DESCRIPTION /from START /to END}.
+     * @return The parsed Event task.
+     * @throws ParserException If the description or either date is missing, either
+     *         date is not in {@code yyyy-MM-dd} format, or the end date precedes the start date.
+     */
     private static Task parseEvent(String details) throws ParserException {
         String[] parts = details.split(" /from ", 2);
         if (parts.length < 2 || parts[0].isEmpty()) {
