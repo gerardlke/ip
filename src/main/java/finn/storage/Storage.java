@@ -19,6 +19,11 @@ import java.util.List;
 public class Storage {
     private final Path storagePath;
 
+    /**
+     * Creates a Storage bound to the given file path.
+     *
+     * @param filePath The path of the file to load tasks from and save tasks to.
+     */
     public Storage(String filePath) {
         this.storagePath = Path.of(filePath);
     }
