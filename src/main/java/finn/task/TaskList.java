@@ -47,4 +47,22 @@ public class TaskList implements Iterable<Task> {
     public Iterator<Task> iterator() {
         return Collections.unmodifiableList(tasks).iterator();
     }
+
+    /**
+     * Returns a new TaskList containing only the tasks whose name contains
+     * the given keyword, case-insensitively, in the same relative order.
+     *
+     * @param keyword The keyword to search for within task names.
+     * @return A TaskList of matching tasks.
+     */
+    public TaskList find(String keyword) {
+        String lowerCaseKeyword = keyword.toLowerCase();
+        List<Task> matches = new ArrayList<>();
+        for (Task task : tasks) {
+            if (task.getName().toLowerCase().contains(lowerCaseKeyword)) {
+                matches.add(task);
+            }
+        }
+        return new TaskList(matches);
+    }
 }

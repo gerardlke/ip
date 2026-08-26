@@ -7,6 +7,7 @@ import finn.command.AddCommand;
 import finn.command.Command;
 import finn.command.DeleteCommand;
 import finn.command.ExitCommand;
+import finn.command.FindCommand;
 import finn.command.ListCommand;
 import finn.command.MarkCommand;
 import finn.exception.ParserException;
@@ -57,6 +58,10 @@ public class Parser {
                 int deleteIndex = parseIndex(arguments);
                 return new DeleteCommand(deleteIndex);
 
+            case "find":
+                String keyword = parseFindKeyword(arguments);
+                return new FindCommand(keyword);
+
             case "todo":
                 Task todo = parseTodo(arguments);
                 return new AddCommand(todo);
@@ -105,6 +110,20 @@ public class Parser {
         } catch (NumberFormatException e) {
             throw new ParserException("Sorry! Invalid task index!");
         }
+    }
+
+    /**
+     * Parses the arguments of a {@code find} command into a search keyword.
+     *
+     * @param details The keyword text supplied by the user.
+     * @return The keyword to search for.
+     * @throws ParserException If the keyword is empty.
+     */
+    private static String parseFindKeyword(String details) throws ParserException {
+        if (details.isEmpty()) {
+            throw new ParserException("Sorry! Please follow the format: find KEYWORD");
+        }
+        return details;
     }
 
     /**

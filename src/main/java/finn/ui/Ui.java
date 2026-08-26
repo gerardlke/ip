@@ -49,6 +49,15 @@ public class Ui {
         System.out.println(BREAKLINE);
     }
 
+    /** Shows the tasks matching a search keyword. */
+    public void showMatchingTasks(TaskList matchingTasks) {
+        System.out.println("Here are the matching tasks in your list:");
+        for (int index = 0; index < matchingTasks.size(); index++) {
+            System.out.println((index + 1) + "." + matchingTasks.get(index));
+        }
+        System.out.println(BREAKLINE);
+    }
+
     /** Shows confirmation that a task was added. */
     public void showTaskAdded(Task task, int taskCount) {
         System.out.println(String.format(
