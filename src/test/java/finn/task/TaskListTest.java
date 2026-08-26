@@ -125,4 +125,49 @@ class TaskListTest {
         tasks.remove(0);
         assertEquals(1, tasks.size());
     }
+
+    @Test
+    void find_matchingKeyword_returnsOnlyMatchingTasksInOriginalOrder() {
+        TaskList tasks = new TaskList();
+        tasks.add(new Todo("read book"));
+        tasks.add(new Todo("write report"));
+        tasks.add(new Todo("return book"));
+
+        TaskList matches = tasks.find("book");
+
+        assertEquals(2, matches.size());
+        assertEquals("read book", matches.get(0).getName());
+        assertEquals("return book", matches.get(1).getName());
+    }
+
+    @Test
+    void find_isCaseInsensitive() {
+        TaskList tasks = new TaskList();
+        tasks.add(new Todo("Read Book"));
+
+        TaskList matches = tasks.find("book");
+
+        assertEquals(1, matches.size());
+    }
+
+    @Test
+    void find_noMatches_returnsEmptyTaskList() {
+        TaskList tasks = new TaskList();
+        tasks.add(new Todo("read book"));
+
+        TaskList matches = tasks.find("nonexistent");
+
+        assertEquals(0, matches.size());
+    }
+
+    @Test
+    void find_doesNotModifyOriginalTaskList() {
+        TaskList tasks = new TaskList();
+        tasks.add(new Todo("read book"));
+        tasks.add(new Todo("write report"));
+
+        tasks.find("book");
+
+        assertEquals(2, tasks.size());
+    }
 }

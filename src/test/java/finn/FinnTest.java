@@ -90,6 +90,18 @@ class FinnTest {
         assertFalse(output.contains("2.[T]"));
     }
 
+    @Test
+    void run_findCommand_showsOnlyMatchingTasksAndLeavesListIntact() {
+        String output = runFinn(
+                tempDir.resolve("finn.txt").toString(),
+                "todo read book\ntodo write report\nfind book\nlist\nbye\n");
+
+        assertTrue(output.contains("Here are the matching tasks in your list:"));
+        assertTrue(output.contains("1.[T][ ] read book"));
+        // The subsequent full "list" must still show both tasks: find() must not mutate state.
+        assertTrue(output.contains("2.[T][ ] write report"));
+    }
+
     // ---------- run(): error recovery is the critical behaviour here ----------
 
     @Test

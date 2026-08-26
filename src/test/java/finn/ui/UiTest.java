@@ -122,6 +122,26 @@ class UiTest {
     }
 
     @Test
+    void showMatchingTasks_printsEachMatchWithOneBasedNumbering() {
+        TaskList matches = new TaskList();
+        matches.add(new Todo("read book"));
+        matches.add(new Todo("return book"));
+
+        new Ui().showMatchingTasks(matches);
+
+        String out = output();
+        assertTrue(out.contains("Here are the matching tasks in your list:"));
+        assertTrue(out.contains("1.[T][ ] read book"));
+        assertTrue(out.contains("2.[T][ ] return book"));
+    }
+
+    @Test
+    void showMatchingTasks_noMatches_printsOnlyHeader() {
+        new Ui().showMatchingTasks(new TaskList());
+        assertTrue(output().contains("Here are the matching tasks in your list:"));
+    }
+
+    @Test
     void readCommand_returnsTrimmedLine() {
         System.setIn(new ByteArrayInputStream("  todo buy milk  \n".getBytes(StandardCharsets.UTF_8)));
         Ui ui = new Ui();
