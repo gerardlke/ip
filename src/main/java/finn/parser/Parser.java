@@ -1,11 +1,19 @@
 package finn.parser;
 
-import finn.command.*;
-import finn.exception.ParserException;
-import finn.task.*;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
+
+import finn.command.AddCommand;
+import finn.command.Command;
+import finn.command.DeleteCommand;
+import finn.command.ExitCommand;
+import finn.command.ListCommand;
+import finn.command.MarkCommand;
+import finn.exception.ParserException;
+import finn.task.Deadline;
+import finn.task.Event;
+import finn.task.Task;
+import finn.task.Todo;
 
 
 /**
@@ -32,37 +40,37 @@ public class Parser {
         String arguments = parts.length > 1 ? parts[1].trim() : "";
 
         switch (commandWord) {
-        case "bye":
-            requireNoDetails("bye", arguments);
-            return new ExitCommand();
+            case "bye":
+                requireNoDetails("bye", arguments);
+                return new ExitCommand();
 
-        case "list":
-            requireNoDetails("list", arguments);
-            return new ListCommand();
+            case "list":
+                requireNoDetails("list", arguments);
+                return new ListCommand();
 
-        case "mark":
-        case "unmark":
-            int markIdx = parseIndex(arguments);
-            return new MarkCommand(markIdx, commandWord.equals("mark"));
+            case "mark":
+            case "unmark":
+                int markIndex = parseIndex(arguments);
+                return new MarkCommand(markIndex, commandWord.equals("mark"));
 
-        case "delete":
-            int deleteIdx = parseIndex(arguments);
-            return new DeleteCommand(deleteIdx);
+            case "delete":
+                int deleteIndex = parseIndex(arguments);
+                return new DeleteCommand(deleteIndex);
 
-        case "todo":
-            Task todo = parseTodo(arguments);
-            return new AddCommand(todo);
+            case "todo":
+                Task todo = parseTodo(arguments);
+                return new AddCommand(todo);
 
-        case "deadline":
-            Task deadline = parseDeadline(arguments);
-            return new AddCommand(deadline);
+            case "deadline":
+                Task deadline = parseDeadline(arguments);
+                return new AddCommand(deadline);
 
-        case "event":
-            Task event = parseEvent(arguments);
-            return new AddCommand(event);
+            case "event":
+                Task event = parseEvent(arguments);
+                return new AddCommand(event);
 
-        default:
-            throw new ParserException("Sorry! Unknown task type: " + commandWord);
+            default:
+                throw new ParserException("Sorry! Unknown task type: " + commandWord);
         }
     }
 

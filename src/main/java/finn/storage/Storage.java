@@ -1,7 +1,5 @@
 package finn.storage;
 
-import finn.task.*;
-
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -11,6 +9,12 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Base64;
 import java.util.List;
+
+import finn.task.Deadline;
+import finn.task.Event;
+import finn.task.Task;
+import finn.task.TaskList;
+import finn.task.Todo;
 
 
 /**
@@ -80,26 +84,27 @@ public class Storage {
         Task task;
         try {
             switch (parts[0]) {
-            case "T":
-                if (parts.length != 3) {
+                case "T":
+                    if (parts.length != 3) {
+                        return null;
+                    }
+                    task = new Todo(decode(parts[2]));
+                    break;
+                case "D":
+                    if (parts.length != 4) {
+                        return null;
+                    }
+                    task = new Deadline(decode(parts[2]), LocalDate.parse(decode(parts[3])));
+                    break;
+                case "E":
+                    if (parts.length != 5) {
+                        return null;
+                    }
+                    task = new Event(decode(parts[2]), LocalDate.parse(decode(parts[3])),
+                            LocalDate.parse(decode(parts[4])));
+                    break;
+                default:
                     return null;
-                }
-                task = new Todo(decode(parts[2]));
-                break;
-            case "D":
-                if (parts.length != 4) {
-                    return null;
-                }
-                task = new Deadline(decode(parts[2]), LocalDate.parse(decode(parts[3])));
-                break;
-            case "E":
-                if (parts.length != 5) {
-                    return null;
-                }
-                task = new Event(decode(parts[2]), LocalDate.parse(decode(parts[3])), LocalDate.parse(decode(parts[4])));
-                break;
-            default:
-                return null;
             }
         } catch (IllegalArgumentException | DateTimeException e) {
             return null;
@@ -121,7 +126,8 @@ public class Storage {
         }
         if (task instanceof Deadline) {
             Deadline deadline = (Deadline) task;
-            return String.format("D | %s | %s | %s", status, encode(task.getName()), encode(deadline.getDeadline().toString()));
+            return String.format("D | %s | %s | %s", status, encode(task.getName()),
+                    encode(deadline.getDeadline().toString()));
         }
         if (task instanceof Event) {
             Event event = (Event) task;
