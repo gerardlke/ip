@@ -1,8 +1,9 @@
 package finn.ui;
 
-import finn.task.*;
-
 import java.util.Scanner;
+
+import finn.task.Task;
+import finn.task.TaskList;
 
 
 /**
@@ -50,7 +51,8 @@ public class Ui {
 
     /** Shows confirmation that a task was added. */
     public void showTaskAdded(Task task, int taskCount) {
-        System.out.println(String.format("Got it. I've added this task:\n    %s\nNow you have %d task(s) in the list.", task, taskCount));
+        System.out.println(String.format(
+                "Got it. I've added this task:\n    %s\nNow you have %d task(s) in the list.", task, taskCount));
         System.out.println(BREAKLINE);
     }
 
@@ -65,7 +67,8 @@ public class Ui {
 
     /** Shows confirmation that a task was removed. */
     public void showTaskDeleted(Task task, int taskCount) {
-        System.out.println(String.format("Oops! I've removed this task:\n    %s\nNow you have %d task(s) in the list.", task, taskCount));
+        System.out.println(String.format(
+                "Oops! I've removed this task:\n    %s\nNow you have %d task(s) in the list.", task, taskCount));
         System.out.println(BREAKLINE);
     }
 

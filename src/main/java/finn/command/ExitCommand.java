@@ -1,9 +1,8 @@
 package finn.command;
 
-import finn.task.Task;
+import finn.storage.Storage;
 import finn.task.TaskList;
 import finn.ui.Ui;
-import finn.storage.Storage;
 
 
 /**
