@@ -224,4 +224,24 @@ class ParserTest {
         assertEquals(1, tasks.size());
         assertEquals("second", tasks.get(0).getName());
     }
+
+    // ---------- find ----------
+
+    @Test
+    void parse_findWithEmptyKeyword_throwsParserException() {
+        assertThrows(ParserException.class, () -> Parser.parse("find"));
+        assertThrows(ParserException.class, () -> Parser.parse("find   "));
+    }
+
+    @Test
+    void parse_validFind_showsOnlyMatchingTasksWithoutModifyingList() throws Exception {
+        TaskList tasks = new TaskList();
+        tasks.add(new Todo("read book"));
+        tasks.add(new Todo("write report"));
+
+        Parser.parse("find book").execute(tasks, ui, storage);
+
+        // find() is read-only: the original list must be untouched.
+        assertEquals(2, tasks.size());
+    }
 }

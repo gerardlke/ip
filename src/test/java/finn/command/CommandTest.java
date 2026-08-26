@@ -175,6 +175,51 @@ class CommandTest {
     }
 
     @Nested
+    class FindCommandTests {
+        @Test
+        void execute_matchingKeyword_printsOnlyMatchingTasks() {
+            TaskList tasks = new TaskList();
+            tasks.add(new Todo("read book"));
+            tasks.add(new Todo("write report"));
+
+            new FindCommand("book").execute(tasks, ui, storage);
+
+            String output = capturedOut.toString();
+            assertTrue(output.contains("Here are the matching tasks in your list:"));
+            assertTrue(output.contains("1.[T][ ] read book"));
+            assertFalse(output.contains("write report"));
+        }
+
+        @Test
+        void execute_noMatches_printsHeaderOnlyWithNoTaskLines() {
+            TaskList tasks = new TaskList();
+            tasks.add(new Todo("write report"));
+
+            new FindCommand("book").execute(tasks, ui, storage);
+
+            String output = capturedOut.toString();
+            assertTrue(output.contains("Here are the matching tasks in your list:"));
+            assertFalse(output.contains("write report"));
+        }
+
+        @Test
+        void execute_doesNotModifyOriginalTaskList() {
+            TaskList tasks = new TaskList();
+            tasks.add(new Todo("read book"));
+            tasks.add(new Todo("write report"));
+
+            new FindCommand("book").execute(tasks, ui, storage);
+
+            assertEquals(2, tasks.size());
+        }
+
+        @Test
+        void isExit_isFalse() {
+            assertFalse(new FindCommand("book").isExit());
+        }
+    }
+
+    @Nested
     class ExitCommandTests {
         @Test
         void isExit_isTrue() {
