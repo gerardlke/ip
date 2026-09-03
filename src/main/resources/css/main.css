@@ -1,0 +1,8 @@
+.root { -fx-background-color: #edfff2; }
+.text-field { -fx-background-color: #d9ffe2; -fx-font: 16px "Arial"; }
+.button { -fx-background-color: mediumspringgreen; -fx-font: bold 15px "Arial"; }
+.button:hover { -fx-background-color: cyan; }
+.scroll-pane, .scroll-pane .viewport { -fx-background-color: transparent; }
+.scroll-bar { -fx-background-color: #edfff2; }
+.scroll-bar .thumb { -fx-background-color: #ff9cb4; }
+.scroll-bar .increment-button, .scroll-bar .decrement-button { -fx-pref-height: 0; -fx-opacity: 0; }

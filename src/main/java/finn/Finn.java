@@ -68,4 +68,16 @@ public class Finn {
             }
         }
     }
+
+    /** Processes one command for either the console or JavaFX interface. */
+    public String getResponse(String input) {
+        try {
+            Command command = Parser.parse(input);
+            command.execute(tasks, ui, storage);
+            return ui.getLastResponse();
+        } catch (Exception e) {
+            ui.showError(e.getMessage());
+            return ui.getLastResponse();
+        }
+    }
 }

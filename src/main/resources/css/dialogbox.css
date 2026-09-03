@@ -1,0 +1,4 @@
+.label { -fx-background-color: linear-gradient(to bottom right, #00ffbf, #00ddff);
+    -fx-border-color: #0072b2; -fx-border-width: 2px; -fx-background-radius: 1em 1em 0 1em;
+    -fx-border-radius: 1em 1em 0 1em; -fx-padding: 6px; -fx-wrap-text: true; }
+.reply-label { -fx-background-radius: 1em 1em 1em 0; -fx-border-radius: 1em 1em 1em 0; }
