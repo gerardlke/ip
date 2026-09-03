@@ -41,7 +41,7 @@ public class Finn {
      *
      * @param args Command-line arguments (unused).
      */
-    public static void main(String[] args) {
+    public static void main(String... args) {
         new Finn("./data/Finn.txt").run();
     }
 
