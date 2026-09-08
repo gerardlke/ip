@@ -155,7 +155,9 @@ public class Parser {
      */
     private static Task parseDeadline(String details) throws ParserException {
         String[] parts = details.split(" /by ", 2);
-        if (parts.length < 2 || parts[0].isEmpty() || parts[1].isEmpty()) {
+        boolean hasDescription = parts.length >= 2 && !parts[0].isEmpty();
+        boolean hasDate = parts.length >= 2 && !parts[1].isEmpty();
+        if (!hasDescription || !hasDate) {
             throw new ParserException("Sorry! Please follow the format: deadline DESCRIPTION /by DATE");
         }
         try {
@@ -177,12 +179,15 @@ public class Parser {
      */
     private static Task parseEvent(String details) throws ParserException {
         String[] parts = details.split(" /from ", 2);
-        if (parts.length < 2 || parts[0].isEmpty()) {
+        boolean hasDescription = parts.length >= 2 && !parts[0].isEmpty();
+        if (!hasDescription) {
             throw new ParserException("Sorry! Please follow the format: event DESCRIPTION /from START /to END");
         }
         String description = parts[0];
         String[] timeParts = parts[1].split(" /to ", 2);
-        if (timeParts.length < 2 || timeParts[0].isEmpty() || timeParts[1].isEmpty()) {
+        boolean hasStartDate = timeParts.length >= 2 && !timeParts[0].isEmpty();
+        boolean hasEndDate = timeParts.length >= 2 && !timeParts[1].isEmpty();
+        if (!hasStartDate || !hasEndDate) {
             throw new ParserException("Sorry! Please follow the format: event DESCRIPTION /from START /to END");
         }
         try {
