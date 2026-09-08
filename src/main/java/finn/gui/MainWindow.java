@@ -30,7 +30,9 @@ public class MainWindow extends AnchorPane {
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
-        if (input.isBlank()) return;
+        if (input.isBlank()) {
+            return;
+        }
         String response = finn.getResponse(input);
         dialogContainer.getChildren().addAll(DialogBox.getUserDialog(input, userImage),
                 DialogBox.getFinnDialog(response, finnImage));
