@@ -9,6 +9,8 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Base64;
 import java.util.List;
+import java.util.Objects;
+import java.util.stream.StreamSupport;
 
 import finn.task.Deadline;
 import finn.task.Event;
@@ -54,19 +56,15 @@ public class Storage {
      * @throws IOException If an I/O error occurs reading from the file.
      */
     public List<Task> load() throws IOException {
-        List<Task> loadedTasks = new ArrayList<>();
         if (!Files.isRegularFile(storagePath)) {
-            return loadedTasks;
+            return new ArrayList<>();
         }
 
-        for (String savedTask : Files.readAllLines(storagePath)) {
-            String[] parts = savedTask.split(" \\| ", -1);
-            Task task = createTask(parts);
-            if (task != null) {
-                loadedTasks.add(task);
-            }
-        }
-        return loadedTasks;
+        return Files.readAllLines(storagePath).stream()
+                .map(savedTask -> savedTask.split(" \\| ", -1))
+                .map(this::createTask)
+                .filter(Objects::nonNull)
+                .toList();
     }
 
     /** 
@@ -80,13 +78,10 @@ public class Storage {
         if (parentDirectory != null) {
             Files.createDirectories(parentDirectory);
         }
-        List<String> savedTasks = new ArrayList<>();
-        for (Task task : tasks) {
-            String savedTask = formatTaskForStorage(task);
-            if (savedTask != null) {
-                savedTasks.add(savedTask);
-            }
-        }
+        List<String> savedTasks = StreamSupport.stream(tasks.spliterator(), false)
+                .map(this::formatTaskForStorage)
+                .filter(Objects::nonNull)
+                .toList();
         Files.write(storagePath, savedTasks);
     }
 
