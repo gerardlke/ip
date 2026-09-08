@@ -96,41 +96,44 @@ public class Storage {
             return null;
         }
 
-        Task task;
         try {
-            switch (parts[0]) {
-                case TODO_MARKER:
-                    if (parts.length != 3) {
-                        return null;
-                    }
-                    task = new Todo(decode(parts[2]));
-                    break;
-                case DEADLINE_MARKER:
-                    if (parts.length != 4) {
-                        return null;
-                    }
-                    task = new Deadline(decode(parts[2]), LocalDate.parse(decode(parts[3])));
-                    break;
-                case EVENT_MARKER:
-                    if (parts.length != 5) {
-                        return null;
-                    }
-                    task = new Event(decode(parts[2]), LocalDate.parse(decode(parts[3])),
-                            LocalDate.parse(decode(parts[4])));
-                    break;
-                default:
-                    return null;
+            Task task = createTaskByType(parts);
+            if (task == null) {
+                return null;
             }
+            if (!applyCompletionStatus(task, parts[1])) {
+                return null;
+            }
+            return task;
         } catch (IllegalArgumentException | DateTimeException e) {
             return null;
         }
+    }
 
-        if (parts[1].equals(COMPLETED_MARKER)) {
-            task.markDone();
-        } else if (!parts[1].equals(INCOMPLETE_MARKER)) {
-            return null;
+    /** Creates a task from the type marker and its encoded fields. */
+    private Task createTaskByType(String[] parts) {
+        switch (parts[0]) {
+            case TODO_MARKER:
+                return parts.length == 3 ? new Todo(decode(parts[2])) : null;
+            case DEADLINE_MARKER:
+                return parts.length == 4
+                        ? new Deadline(decode(parts[2]), LocalDate.parse(decode(parts[3]))) : null;
+            case EVENT_MARKER:
+                return parts.length == 5
+                        ? new Event(decode(parts[2]), LocalDate.parse(decode(parts[3])),
+                        LocalDate.parse(decode(parts[4]))) : null;
+            default:
+                return null;
         }
-        return task;
+    }
+
+    /** Applies the persisted completion marker to a task. */
+    private boolean applyCompletionStatus(Task task, String status) {
+        if (status.equals(COMPLETED_MARKER)) {
+            task.markDone();
+            return true;
+        }
+        return status.equals(INCOMPLETE_MARKER);
     }
 
     /** Converts a task into one line of the storage format. */
