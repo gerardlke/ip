@@ -43,20 +43,19 @@ public class Ui {
 
     /** Shows the current task list. */
     public void showTaskList(TaskList tasks) {
-        StringBuilder response = new StringBuilder("Here are the tasks in your list:\n");
-        for (int index = 0; index < tasks.size(); index++) {
-            response.append(index + 1).append(".").append(tasks.get(index)).append("\n");
-        }
-        lastResponse = response.toString().trim();
-        System.out.println(lastResponse);
-        System.out.println(BREAKLINE);
+        showTasks(tasks, "Here are the tasks in your list:\n");
     }
 
     /** Shows the tasks matching a search keyword. */
     public void showMatchingTasks(TaskList matchingTasks) {
-        StringBuilder response = new StringBuilder("Here are the matching tasks in your list:\n");
-        for (int index = 0; index < matchingTasks.size(); index++) {
-            response.append(index + 1).append(".").append(matchingTasks.get(index)).append("\n");
+        showTasks(matchingTasks, "Here are the matching tasks in your list:\n");
+    }
+
+    /** Builds and displays a task list with the supplied heading. */
+    private void showTasks(TaskList tasks, String heading) {
+        StringBuilder response = new StringBuilder(heading);
+        for (int index = 0; index < tasks.size(); index++) {
+            response.append(index + 1).append(".").append(tasks.get(index)).append("\n");
         }
         lastResponse = response.toString().trim();
         System.out.println(lastResponse);
