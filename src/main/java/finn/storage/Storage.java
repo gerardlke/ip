@@ -83,18 +83,21 @@ public class Storage {
                     if (parts.length != 3) {
                         return null;
                     }
+                    assert parts.length == 3 : "A todo record must contain exactly three fields";
                     task = new Todo(decode(parts[2]));
                     break;
                 case "D":
                     if (parts.length != 4) {
                         return null;
                     }
+                    assert parts.length == 4 : "A deadline record must contain exactly four fields";
                     task = new Deadline(decode(parts[2]), LocalDate.parse(decode(parts[3])));
                     break;
                 case "E":
                     if (parts.length != 5) {
                         return null;
                     }
+                    assert parts.length == 5 : "An event record must contain exactly five fields";
                     task = new Event(decode(parts[2]), LocalDate.parse(decode(parts[3])),
                             LocalDate.parse(decode(parts[4])));
                     break;

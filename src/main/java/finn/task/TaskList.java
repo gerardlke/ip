@@ -24,6 +24,7 @@ public class TaskList implements Iterable<Task> {
 
     /** Adds a task to the end of the list. */
     public void add(Task task) {
+        assert task != null : "TaskList must not contain null tasks";
         tasks.add(task);
     }
 
@@ -56,6 +57,7 @@ public class TaskList implements Iterable<Task> {
      * @return A TaskList of matching tasks.
      */
     public TaskList find(String keyword) {
+        assert keyword != null : "The search keyword must be validated before searching";
         String lowerCaseKeyword = keyword.toLowerCase();
         List<Task> matches = new ArrayList<>();
         for (Task task : tasks) {
