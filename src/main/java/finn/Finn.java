@@ -53,16 +53,16 @@ public class Finn {
      */
     public void run() {
         ui.showWelcome();
-        boolean isExit = false;
-        while (!isExit) {
+        boolean shouldExit = false;
+        while (!shouldExit) {
             try {
                 String fullCommand = ui.readCommand();
                 if (fullCommand == null) {
                     break;
                 }
-                Command c = Parser.parse(fullCommand);
-                c.execute(tasks, ui, storage);
-                isExit = c.isExit();
+                Command command = Parser.parse(fullCommand);
+                command.execute(tasks, ui, storage);
+                shouldExit = command.isExit();
             } catch (Exception e) {
                 ui.showError(e.getMessage());
             }
