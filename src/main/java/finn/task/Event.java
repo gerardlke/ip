@@ -29,6 +29,8 @@ public class Event extends Task {
         }
         this.start = start;
         this.end = end;
+        assert this.start != null && this.end != null && !this.end.isBefore(this.start)
+                : "An event must have an ordered, non-null date range";
     }
 
     /**
