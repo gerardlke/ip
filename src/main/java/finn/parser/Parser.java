@@ -2,6 +2,7 @@ package finn.parser;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
+import java.util.HashMap;
 import java.util.Map;
 
 import finn.command.AddCommand;
@@ -194,28 +195,45 @@ public class Parser {
      *         date is not in {@code yyyy-MM-dd} format, or the end date precedes the start date.
      */
     private static Task parseEvent(String details) throws ParserException {
-        String[] parts = details.split(" /from ", 2);
-        boolean hasDescription = parts.length >= 2 && !parts[0].isEmpty();
-        if (!hasDescription) {
-            throw new ParserException("Sorry! Please follow the format: event DESCRIPTION /from START /to END");
+        String[] tokens = details.split("\\s+");
+        Map<String, String> dates = new HashMap<>();
+        StringBuilder description = new StringBuilder();
+
+        for (int i = 0; i < tokens.length; i++) {
+            String token = tokens[i];
+            if (token.equals("/from") || token.equals("/to")) {
+                if (dates.containsKey(token) || i + 1 >= tokens.length
+                        || tokens[i + 1].startsWith("/")) {
+                    throw invalidEventFormat();
+                }
+                dates.put(token, tokens[++i]);
+            } else {
+                if (description.length() > 0) {
+                    description.append(' ');
+                }
+                description.append(token);
+            }
         }
-        String description = parts[0];
-        String[] timeParts = parts[1].split(" /to ", 2);
-        boolean hasStartDate = timeParts.length >= 2 && !timeParts[0].isEmpty();
-        boolean hasEndDate = timeParts.length >= 2 && !timeParts[1].isEmpty();
-        if (!hasStartDate || !hasEndDate) {
-            throw new ParserException("Sorry! Please follow the format: event DESCRIPTION /from START /to END");
+
+        if (description.length() == 0 || !dates.containsKey("/from") || !dates.containsKey("/to")) {
+            throw invalidEventFormat();
         }
+
         try {
-            LocalDate fromDate = LocalDate.parse(timeParts[0]);
-            LocalDate toDate = LocalDate.parse(timeParts[1]);
+            LocalDate fromDate = LocalDate.parse(dates.get("/from"));
+            LocalDate toDate = LocalDate.parse(dates.get("/to"));
             if (toDate.isBefore(fromDate)) {
                 throw new ParserException("Sorry! The event end date must not be before its start date.");
             }
             assert !toDate.isBefore(fromDate) : "Parsed event dates must be in chronological order";
-            return new Event(description, fromDate, toDate);
+            return new Event(description.toString(), fromDate, toDate);
         } catch (DateTimeParseException e) {
             throw new ParserException("Sorry! Please use valid dates in the format yyyy-MM-dd.");
         }
+    }
+
+    /** Creates the standard error for a malformed event command. */
+    private static ParserException invalidEventFormat() {
+        return new ParserException("Sorry! Please follow the format: event DESCRIPTION /from START /to END");
     }
 }

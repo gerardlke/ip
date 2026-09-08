@@ -83,7 +83,7 @@ Inputs:
 
 ```text
 deadline do homework /by 2019-10-15
-event project meeting /from 2019-10-16 /to 2019-10-17
+event /to 2019-10-17 project meeting /from 2019-10-16
 list
 bye
 

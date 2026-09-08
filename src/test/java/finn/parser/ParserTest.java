@@ -186,6 +186,29 @@ class ParserTest {
         assertEquals("2024-05-10", ((Event) task).getEnd().toString());
     }
 
+    @Test
+    void parse_eventArgumentsInEitherOrder_addsEquivalentEventTasks() throws Exception {
+        Command reordered = Parser.parse("event /to 2024-05-10 team trip /from 2024-05-01");
+        Command interleaved = Parser.parse("event team /to 2024-05-10 trip /from 2024-05-01");
+
+        TaskList tasks = new TaskList();
+        reordered.execute(tasks, ui, storage);
+        interleaved.execute(tasks, ui, storage);
+
+        assertEquals(2, tasks.size());
+        assertEquals("team trip", tasks.get(0).getName());
+        assertEquals("team trip", tasks.get(1).getName());
+        assertEquals(((Event) tasks.get(0)).getStart(), ((Event) tasks.get(1)).getStart());
+        assertEquals(((Event) tasks.get(0)).getEnd(), ((Event) tasks.get(1)).getEnd());
+    }
+
+    @Test
+    void parse_eventDuplicateOrMissingDateMarker_throwsParserException() {
+        assertThrows(ParserException.class,
+                () -> Parser.parse("event trip /from 2024-05-01 /from 2024-05-02 /to 2024-05-10"));
+        assertThrows(ParserException.class, () -> Parser.parse("event trip /from /to 2024-05-10"));
+    }
+
     // ---------- mark / unmark ----------
 
     @Test
