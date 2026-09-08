@@ -8,13 +8,13 @@ Aim: Verify that a todo can be added, listed, marked, unmarked, and displayed wi
 
 Inputs:
 ```text
-todo borrow book
-list
-mark 1
-list
-unmark 1
-list
-bye
+t borrow book
+l
+m 1
+l
+um 1
+l
+b
 
 ```
 

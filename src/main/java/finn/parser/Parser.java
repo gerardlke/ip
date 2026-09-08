@@ -2,6 +2,7 @@ package finn.parser;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
+import java.util.Map;
 
 import finn.command.AddCommand;
 import finn.command.Command;
@@ -22,6 +23,18 @@ import finn.task.Todo;
  */
 public class Parser {
 
+    /** Fixed short aliases for the commands supported by Finn. */
+    private static final Map<String, String> COMMAND_ALIASES = Map.of(
+            "b", "bye",
+            "l", "list",
+            "m", "mark",
+            "um", "unmark",
+            "d", "delete",
+            "f", "find",
+            "t", "todo",
+            "dl", "deadline",
+            "e", "event");
+
     /**
      * Parses one line of user input into a {@link Command}.
      *
@@ -39,6 +52,7 @@ public class Parser {
         String[] parts = trimmed.split("\\s+", 2);
         assert parts.length >= 1 : "A non-empty command must have a command word";
         String commandWord = parts[0].toLowerCase();
+        commandWord = COMMAND_ALIASES.getOrDefault(commandWord, commandWord);
         String arguments = parts.length > 1 ? parts[1].trim() : "";
 
         return parseCommand(commandWord, arguments);

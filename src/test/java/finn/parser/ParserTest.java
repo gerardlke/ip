@@ -2,6 +2,7 @@ package finn.parser;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -61,6 +62,19 @@ class ParserTest {
     void parse_unknownCommandWord_throwsParserException() {
         ParserException ex = assertThrows(ParserException.class, () -> Parser.parse("frobnicate stuff"));
         assertTrue(ex.getMessage().contains("Unknown task type"));
+    }
+
+    @Test
+    void parse_shortAliases_areAcceptedForAllCommands() {
+        assertDoesNotThrow(() -> Parser.parse("b"));
+        assertDoesNotThrow(() -> Parser.parse("l"));
+        assertDoesNotThrow(() -> Parser.parse("m 1"));
+        assertDoesNotThrow(() -> Parser.parse("um 1"));
+        assertDoesNotThrow(() -> Parser.parse("d 1"));
+        assertDoesNotThrow(() -> Parser.parse("f book"));
+        assertDoesNotThrow(() -> Parser.parse("t buy milk"));
+        assertDoesNotThrow(() -> Parser.parse("dl submit report /by 2024-03-15"));
+        assertDoesNotThrow(() -> Parser.parse("e team meeting /from 2024-05-01 /to 2024-05-10"));
     }
 
     // ---------- bye / list: commands that take no arguments ----------
