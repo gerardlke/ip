@@ -21,6 +21,21 @@ import finn.task.Todo;
  * Handles loading and saving tasks from/to the storage file.
  */
 public class Storage {
+    /** Storage marker for a todo task. */
+    private static final String TODO_MARKER = "T";
+
+    /** Storage marker for a deadline task. */
+    private static final String DEADLINE_MARKER = "D";
+
+    /** Storage marker for an event task. */
+    private static final String EVENT_MARKER = "E";
+
+    /** Storage marker for a completed task. */
+    private static final String COMPLETED_MARKER = "1";
+
+    /** Storage marker for an incomplete task. */
+    private static final String INCOMPLETE_MARKER = "0";
+
     private final Path storagePath;
 
     /**
@@ -84,19 +99,19 @@ public class Storage {
         Task task;
         try {
             switch (parts[0]) {
-                case "T":
+                case TODO_MARKER:
                     if (parts.length != 3) {
                         return null;
                     }
                     task = new Todo(decode(parts[2]));
                     break;
-                case "D":
+                case DEADLINE_MARKER:
                     if (parts.length != 4) {
                         return null;
                     }
                     task = new Deadline(decode(parts[2]), LocalDate.parse(decode(parts[3])));
                     break;
-                case "E":
+                case EVENT_MARKER:
                     if (parts.length != 5) {
                         return null;
                     }
@@ -110,9 +125,9 @@ public class Storage {
             return null;
         }
 
-        if (parts[1].equals("1")) {
+        if (parts[1].equals(COMPLETED_MARKER)) {
             task.markDone();
-        } else if (!parts[1].equals("0")) {
+        } else if (!parts[1].equals(INCOMPLETE_MARKER)) {
             return null;
         }
         return task;
@@ -120,18 +135,18 @@ public class Storage {
 
     /** Converts a task into one line of the storage format. */
     private String formatTaskForStorage(Task task) {
-        String status = task.isCompleted() ? "1" : "0";
+        String status = task.isCompleted() ? COMPLETED_MARKER : INCOMPLETE_MARKER;
         if (task instanceof Todo) {
-            return String.format("T | %s | %s", status, encode(task.getName()));
+            return String.format("%s | %s | %s", TODO_MARKER, status, encode(task.getName()));
         }
         if (task instanceof Deadline) {
             Deadline deadline = (Deadline) task;
-            return String.format("D | %s | %s | %s", status, encode(task.getName()),
+            return String.format("%s | %s | %s | %s", DEADLINE_MARKER, status, encode(task.getName()),
                     encode(deadline.getDeadline().toString()));
         }
         if (task instanceof Event) {
             Event event = (Event) task;
-            return String.format("E | %s | %s | %s | %s", status, encode(task.getName()),
+            return String.format("%s | %s | %s | %s | %s", EVENT_MARKER, status, encode(task.getName()),
                     encode(event.getStart().toString()), encode(event.getEnd().toString()));
         }
         return null;
