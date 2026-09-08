@@ -40,6 +40,11 @@ public class Parser {
         String commandWord = parts[0].toLowerCase();
         String arguments = parts.length > 1 ? parts[1].trim() : "";
 
+        return parseCommand(commandWord, arguments);
+    }
+
+    /** Dispatches a validated command word to the parser for its arguments. */
+    private static Command parseCommand(String commandWord, String arguments) throws ParserException {
         switch (commandWord) {
             case "bye":
                 requireNoDetails("bye", arguments);
