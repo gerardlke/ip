@@ -13,6 +13,7 @@ public class Task {
      * @param name The task's description.
      */
     public Task(String name) {
+        assert name != null : "A task must have a name";
         this.name = name;
         this.completed = false;
     }
@@ -38,11 +39,13 @@ public class Task {
     /** Marks this task as done. */
     public void markDone() {
         this.completed = true;
+        assert this.completed : "markDone must leave the task completed";
     }
 
     /** Marks this task as not done. */
     public void markUndone() {
         this.completed = false;
+        assert !this.completed : "markUndone must leave the task incomplete";
     }
 
     /**

@@ -37,6 +37,7 @@ public class Parser {
 
         String trimmed = fullInput.trim();
         String[] parts = trimmed.split("\\s+", 2);
+        assert parts.length >= 1 : "A non-empty command must have a command word";
         String commandWord = parts[0].toLowerCase();
         String arguments = parts.length > 1 ? parts[1].trim() : "";
 
@@ -111,6 +112,7 @@ public class Parser {
             if (index < 0) {
                 throw new ParserException("Sorry! Invalid task index!");
             }
+            assert index >= 0 : "parseIndex must return a zero-based non-negative index";
             return index;
         } catch (NumberFormatException e) {
             throw new ParserException("Sorry! Invalid task index!");
@@ -196,6 +198,7 @@ public class Parser {
             if (toDate.isBefore(fromDate)) {
                 throw new ParserException("Sorry! The event end date must not be before its start date.");
             }
+            assert !toDate.isBefore(fromDate) : "Parsed event dates must be in chronological order";
             return new Event(description, fromDate, toDate);
         } catch (DateTimeParseException e) {
             throw new ParserException("Sorry! Please use valid dates in the format yyyy-MM-dd.");
