@@ -13,6 +13,9 @@ import finn.ui.Ui;
  * it reports to the user, and whether it should end the program.
  */
 public abstract class Command {
+    /** Initializes the base of an executable command. */
+    protected Command() {
+    }
 
     /**
      * Executes this command against the given task list, reporting results

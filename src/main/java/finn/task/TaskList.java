@@ -12,7 +12,11 @@ import java.util.List;
 public class TaskList implements Iterable<Task> {
     private final List<Task> tasks;
 
-    /** Builds an existing task list. */
+    /**
+     * Copies an existing list, preserving task order and sharing the task objects.
+     *
+     * @param tasks The tasks to include in the new list.
+     */
     public TaskList(List<Task> tasks) {
         this.tasks = new ArrayList<>(tasks);
     }
@@ -22,23 +26,43 @@ public class TaskList implements Iterable<Task> {
         this.tasks = new ArrayList<>();
     }
 
-    /** Adds a task to the end of the list. */
+    /**
+     * Adds a task to the end of the list.
+     *
+     * @param task The non-null task to append.
+     */
     public void add(Task task) {
         assert task != null : "TaskList must not contain null tasks";
         tasks.add(task);
     }
 
-    /** Returns the task at a zero-based index. */
+    /**
+     * Returns the task at a zero-based index.
+     *
+     * @param index The position of the task.
+     * @return The task at that position.
+     * @throws IndexOutOfBoundsException If the index is outside the list.
+     */
     public Task get(int index) {
         return tasks.get(index);
     }
 
-    /** Removes and returns the task at a zero-based index. */
+    /**
+     * Removes and returns the task at a zero-based index.
+     *
+     * @param index The position of the task to remove.
+     * @return The removed task.
+     * @throws IndexOutOfBoundsException If the index is outside the list.
+     */
     public Task remove(int index) {
         return tasks.remove(index);
     }
 
-    /** Returns the number of tasks in the list. */
+    /**
+     * Returns the number of tasks in the list.
+     *
+     * @return The current task count.
+     */
     public int size() {
         return tasks.size();
     }

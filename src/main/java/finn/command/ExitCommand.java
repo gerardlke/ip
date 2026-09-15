@@ -9,6 +9,9 @@ import finn.ui.Ui;
  * Represents a command that ends the program.
  */
 public class ExitCommand extends Command {
+    /** Creates a command that displays the farewell and signals the console loop to exit. */
+    public ExitCommand() {
+    }
 
     /**
      * Shows the farewell message. Does not modify the task list or storage.

@@ -470,3 +470,13 @@ What can I do for you? _________________________________________________________
 Bye. Hope to see you again soon!
 
 ```
+
+## GUI appearance checks (manual)
+
+- At 380 × 360 and 520 × 680, and when enlarged, check that long commands and replies wrap without horizontal scrolling and the composer stays visible.
+- Send `list`: the user message has a right-aligned neutral bubble; Finn has a 28px circular DaFinn.png avatar and a wide, plain reply.
+- Send `unknown`: the reply has a red accent, tinted background, and a Command error label. Send `list` again: normal styling returns.
+- Check that blank input disables Send, Enter submits a command, and keyboard focus returns to the input after clicking Send.
+- Scroll up through a long conversation, then send a command: the newest response becomes visible.
+- User avatar: check that DaUser.jpg appears as a 28px circle to the right of each user bubble, without stretching or clipping message text at the minimum window width.
+- Avatar consistency: Finn replies and the top bar show DaFinn.png with the same 28px circular crop as the user avatar; the top bar no longer shows an F placeholder.

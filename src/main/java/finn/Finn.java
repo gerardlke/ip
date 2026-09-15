@@ -14,6 +14,8 @@ public class Finn {
     private final Storage storage;
     private final TaskList tasks;
     private final Ui ui;
+    /** Status of the latest getResponse call; separate from the response wording used by the GUI. */
+    private boolean responseError;
 
     /**
      * Creates a Finn instance backed by the given storage file, loading
@@ -69,15 +71,34 @@ public class Finn {
         }
     }
 
-    /** Processes one command for either the console or JavaFX interface. */
+    /**
+     * Processes one command, returning the message also printed by the console UI.
+     * Parsing and execution errors become response messages rather than escaping to the caller.
+     * Updates {@link #isResponseError()} on every call, including successful commands after errors.
+     *
+     * @param input The command text to parse and execute.
+     * @return The command's confirmation, task list, or error message.
+     */
     public String getResponse(String input) {
+        responseError = false;
         try {
             Command command = Parser.parse(input);
             command.execute(tasks, ui, storage);
             return ui.getLastResponse();
         } catch (Exception e) {
+            responseError = true;
             ui.showError(e.getMessage());
             return ui.getLastResponse();
         }
+    }
+
+    /**
+     * Indicates whether the latest {@link #getResponse(String)} call failed.
+     * This status does not describe commands executed by the console's {@link #run()} loop.
+     *
+     * @return True if the latest response reports an error; false before the first call or after success.
+     */
+    public boolean isResponseError() {
+        return responseError;
     }
 }

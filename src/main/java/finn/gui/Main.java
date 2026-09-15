@@ -11,6 +11,15 @@ import javafx.stage.Stage;
 
 /** JavaFX entry point for Finn. */
 public class Main extends Application {
+    /** Creates the application instance used by the JavaFX launcher. */
+    public Main() {
+    }
+
+    /**
+     * Loads the main window, connects persistent task storage, and shows a resizable stage.
+     *
+     * @param stage The primary window supplied by JavaFX.
+     */
     @Override
     public void start(Stage stage) {
         try {
@@ -19,8 +28,9 @@ public class Main extends Application {
             loader.<MainWindow>getController().setFinn(new Finn("./data/Finn.txt"));
             stage.setScene(new Scene(root));
             stage.setTitle("Finn");
-            stage.setMinWidth(417);
-            stage.setMinHeight(220);
+            stage.setMinWidth(380);
+            stage.setMinHeight(360);
+            stage.setResizable(true);
             stage.show();
         } catch (IOException e) {
             throw new RuntimeException("Unable to load Finn GUI", e);

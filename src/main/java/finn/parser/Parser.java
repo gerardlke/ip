@@ -24,6 +24,10 @@ import finn.task.Todo;
  */
 public class Parser {
 
+    /** Prevents instantiation; commands are parsed through the static parse method. */
+    private Parser() {
+    }
+
     /** Fixed short aliases for the commands supported by Finn. */
     private static final Map<String, String> COMMAND_ALIASES = Map.of(
             "b", "bye",
