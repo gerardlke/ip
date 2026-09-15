@@ -33,7 +33,7 @@ public class Main extends Application {
             stage.setResizable(true);
             stage.show();
         } catch (IOException e) {
-            throw new RuntimeException("Unable to load Finn GUI", e);
+            throw new RuntimeException("Unable to load Pip GUI", e);
         }
     }
 }

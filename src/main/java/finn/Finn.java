@@ -1,5 +1,7 @@
 package finn;
 
+import java.io.IOException;
+
 import finn.command.Command;
 import finn.parser.Parser;
 import finn.storage.Storage;
@@ -16,6 +18,8 @@ public class Finn {
     private final Ui ui;
     /** Status of the latest getResponse call; separate from the response wording used by the GUI. */
     private boolean responseError;
+    /** Loading warning retained for the GUI, which is connected after storage is loaded. */
+    private String startupWarning = "";
 
     /**
      * Creates a Finn instance backed by the given storage file, loading
@@ -31,7 +35,8 @@ public class Finn {
         try {
             loadedTasks = new TaskList(storage.load());
         } catch (Exception e) {
-            ui.showError("Error loading tasks from file. Starting with an empty list.");
+            startupWarning = "Error loading tasks from file. Starting with an empty list.";
+            ui.showError(startupWarning);
             loadedTasks = new TaskList();
         }
         tasks = loadedTasks;
@@ -87,7 +92,10 @@ public class Finn {
             return ui.getLastResponse();
         } catch (Exception e) {
             responseError = true;
-            ui.showError(e.getMessage());
+            ui.showError(e instanceof IOException
+                    ? "Aw, nuts! I couldn't save your tasks. Check the data folder and write permissions. "
+                            + "Your change is in memory only; keep Pip open until you can save it."
+                    : e.getMessage());
             return ui.getLastResponse();
         }
     }
@@ -100,5 +108,14 @@ public class Finn {
      */
     public boolean isResponseError() {
         return responseError;
+    }
+
+    /**
+     * Returns any warning produced while loading saved tasks.
+     *
+     * @return The warning, or an empty string when loading succeeded or no file existed.
+     */
+    public String getStartupWarning() {
+        return startupWarning;
     }
 }

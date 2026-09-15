@@ -23,7 +23,8 @@ public class Ui {
     public void showWelcome() {
         String banner = "PIP | Small paws. Big plans.\n";
         System.out.println(banner + BREAKLINE);
-        System.out.println("Hey there! I'm Pip, your chipmunk task buddy.\nSmall paws. Big plans. Let's chip away at your tasks!\n" + BREAKLINE);
+        System.out.println("Hey there! I'm Pip, your chipmunk task buddy.\n"
+                + "Small paws. Big plans. Let's chip away at your tasks!\n" + BREAKLINE);
     }
 
     /**
@@ -78,7 +79,8 @@ public class Ui {
      */
     public void showTaskAdded(Task task, int taskCount) {
         lastResponse = String.format(
-                "Acorn secured! I've added this task:\n    %s\nNow you have %d task(s) in your stash.", task, taskCount);
+                "Acorn secured! I've added this task:\n    %s\nNow you have %d task(s) in your stash.",
+                task, taskCount);
         System.out.println(lastResponse);
         System.out.println(BREAKLINE);
     }
@@ -105,7 +107,8 @@ public class Ui {
      */
     public void showTaskDeleted(Task task, int taskCount) {
         lastResponse = String.format(
-                "Cleared from the stash! I've removed this task:\n    %s\nNow you have %d task(s) in your stash.", task, taskCount);
+                "Cleared from the stash! I've removed this task:\n    %s\nNow you have %d task(s) in your stash.",
+                task, taskCount);
         System.out.println(lastResponse);
         System.out.println(BREAKLINE);
     }

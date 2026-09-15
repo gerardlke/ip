@@ -36,3 +36,5 @@ The responsive layout and readable Segoe UI font keep longer replies easy to fol
 
 Run `./gradlew check javadoc` with Java 25. See `test/ui-test-plan.md` for
 console transcripts and manual GUI checks.
+
+See the [Pip User Guide](docs/README.md) for examples, error recovery, and storage details.
