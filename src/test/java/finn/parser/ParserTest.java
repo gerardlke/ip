@@ -33,6 +33,21 @@ import finn.ui.Ui;
  * (e.g. out-of-range index) only fail once the command is executed.
  */
 class ParserTest {
+    /** Woodland aliases retain the behavior and validation of their canonical commands. */
+    @Test
+    void parse_woodlandAliases_executeAndValidateLikeOriginalCommands() throws Exception {
+        TaskList tasks = new TaskList();
+        Parser.parse("gather collect acorns").execute(tasks, ui, storage);
+        assertEquals("collect acorns", tasks.get(0).getName());
+        assertTrue(Parser.parse("stash") instanceof finn.command.ListCommand);
+        assertTrue(Parser.parse("sniff acorns") instanceof finn.command.FindCommand);
+        assertTrue(Parser.parse("scamper").isExit());
+        assertThrows(ParserException.class, () -> Parser.parse("gather"));
+        assertThrows(ParserException.class, () -> Parser.parse("sniff"));
+        assertThrows(ParserException.class, () -> Parser.parse("stash extra"));
+        assertThrows(ParserException.class, () -> Parser.parse("scamper extra"));
+    }
+
 
     @TempDir
     Path tempDir;

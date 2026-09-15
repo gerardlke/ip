@@ -154,7 +154,7 @@ class CommandTest {
         void execute_emptyList_doesNotThrowAndPrintsHeader() {
             TaskList tasks = new TaskList();
             new ListCommand().execute(tasks, ui, storage);
-            assertTrue(capturedOut.toString().contains("Here are the tasks in your list"));
+            assertTrue(capturedOut.toString().contains("Here is your task stash"));
         }
 
         @Test
@@ -185,7 +185,7 @@ class CommandTest {
             new FindCommand("book").execute(tasks, ui, storage);
 
             String output = capturedOut.toString();
-            assertTrue(output.contains("Here are the matching tasks in your list:"));
+            assertTrue(output.contains("Sniffed them out! Here are your matching tasks:"));
             assertTrue(output.contains("1.[T][ ] read book"));
             assertFalse(output.contains("write report"));
         }
@@ -198,7 +198,7 @@ class CommandTest {
             new FindCommand("book").execute(tasks, ui, storage);
 
             String output = capturedOut.toString();
-            assertTrue(output.contains("Here are the matching tasks in your list:"));
+            assertTrue(output.contains("Sniffed them out! Here are your matching tasks:"));
             assertFalse(output.contains("write report"));
         }
 

@@ -40,7 +40,10 @@ public class MainWindow {
      */
     public void setFinn(Finn finn) {
         this.finn = finn;
-        dialogContainer.getChildren().add(DialogBox.getFinnDialog("Hello! I'm Finn. How can I help?", false));
+        dialogContainer.getChildren().add(DialogBox.getFinnDialog(
+                "Hey there! I'm Pip, your chipmunk task buddy.\n"
+                        + "Small paws. Big plans. Let's chip away at your tasks!\n\n"
+                        + "Try gather read a book, stash, or sniff book.", false));
     }
 
     /**

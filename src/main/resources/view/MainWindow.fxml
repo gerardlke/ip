@@ -7,21 +7,21 @@
     <VBox AnchorPane.topAnchor="0" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0"
           AnchorPane.rightAnchor="0">
         <HBox fx:id="header" styleClass="header" alignment="CENTER_LEFT" spacing="10">
-            <Label text="Finn" styleClass="title" />
+            <Label text="Pip" styleClass="title" />
             <Region HBox.hgrow="ALWAYS" />
-            <Label text="Your task companion" styleClass="subtitle" />
+            <Label text="Small paws. Big plans." styleClass="subtitle" />
         </HBox>
         <ScrollPane fx:id="scrollPane" fitToWidth="true" hbarPolicy="NEVER" VBox.vgrow="ALWAYS" minHeight="0">
             <content><VBox fx:id="dialogContainer" styleClass="conversation" spacing="20" /></content>
         </ScrollPane>
         <VBox styleClass="composer-area" spacing="8">
             <HBox styleClass="composer" alignment="CENTER" spacing="8">
-                <TextField fx:id="userInput" onAction="#handleUserInput" promptText="Tell Finn what to do…"
+                <TextField fx:id="userInput" onAction="#handleUserInput" promptText="What shall we chip away at?"
                            HBox.hgrow="ALWAYS" minWidth="0" accessibleText="Command" />
                 <Button fx:id="sendButton" onAction="#handleUserInput" text="Send &#8593;" minWidth="76"
                         accessibleText="Send command" />
             </HBox>
-            <Label text="Try: todo read a book  ·  list  ·  find book" styleClass="hint" wrapText="true" />
+            <Label text="gather = todo  ·  stash = list  ·  sniff = find" styleClass="hint" wrapText="true" />
         </VBox>
     </VBox>
 </AnchorPane>

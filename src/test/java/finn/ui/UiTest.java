@@ -48,13 +48,13 @@ class UiTest {
     @Test
     void showWelcome_printsGreeting() {
         new Ui().showWelcome();
-        assertTrue(output().contains("Hello! I'm Finn."));
+        assertTrue(output().contains("Hey there! I'm Pip, your chipmunk task buddy."));
     }
 
     @Test
     void showGoodbye_printsFarewell() {
         new Ui().showGoodbye();
-        assertTrue(output().contains("Bye. Hope to see you again soon!"));
+        assertTrue(output().contains("Scampering off! See you next time, task buddy."));
     }
 
     @Test
@@ -69,9 +69,9 @@ class UiTest {
         new Ui().showTaskAdded(todo, 3);
 
         String out = output();
-        assertTrue(out.contains("Got it. I've added this task:"));
+        assertTrue(out.contains("Acorn secured! I've added this task:"));
         assertTrue(out.contains(todo.toString()));
-        assertTrue(out.contains("Now you have 3 task(s) in the list."));
+        assertTrue(out.contains("Now you have 3 task(s) in your stash."));
     }
 
     @Test
@@ -82,7 +82,7 @@ class UiTest {
         String out = output();
         assertTrue(out.contains("I've removed this task:"));
         assertTrue(out.contains(todo.toString()));
-        assertTrue(out.contains("Now you have 1 task(s) in the list."));
+        assertTrue(out.contains("Now you have 1 task(s) in your stash."));
     }
 
     @Test
@@ -118,7 +118,7 @@ class UiTest {
     @Test
     void showTaskList_emptyList_printsOnlyHeader() {
         new Ui().showTaskList(new TaskList());
-        assertTrue(output().contains("Here are the tasks in your list:"));
+        assertTrue(output().contains("Here is your task stash:"));
     }
 
     @Test
@@ -130,7 +130,7 @@ class UiTest {
         new Ui().showMatchingTasks(matches);
 
         String out = output();
-        assertTrue(out.contains("Here are the matching tasks in your list:"));
+        assertTrue(out.contains("Sniffed them out! Here are your matching tasks:"));
         assertTrue(out.contains("1.[T][ ] read book"));
         assertTrue(out.contains("2.[T][ ] return book"));
     }
@@ -138,7 +138,7 @@ class UiTest {
     @Test
     void showMatchingTasks_noMatches_printsOnlyHeader() {
         new Ui().showMatchingTasks(new TaskList());
-        assertTrue(output().contains("Here are the matching tasks in your list:"));
+        assertTrue(output().contains("Sniffed them out! Here are your matching tasks:"));
     }
 
     @Test

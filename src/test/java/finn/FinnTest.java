@@ -72,10 +72,10 @@ class FinnTest {
                 tempDir.resolve("finn.txt").toString(),
                 "todo buy milk\nlist\nbye\n");
 
-        assertTrue(output.contains("Hello! I'm Finn."));
-        assertTrue(output.contains("Got it. I've added this task:"));
+        assertTrue(output.contains("Hey there! I'm Pip, your chipmunk task buddy."));
+        assertTrue(output.contains("Acorn secured! I've added this task:"));
         assertTrue(output.contains("1.[T][ ] buy milk"));
-        assertTrue(output.contains("Bye. Hope to see you again soon!"));
+        assertTrue(output.contains("Scampering off! See you next time, task buddy."));
     }
 
     @Test
@@ -85,7 +85,7 @@ class FinnTest {
                 "todo a\ntodo b\ndelete 1\nlist\nbye\n");
 
         // "a" was removed; "b" shifts into slot 1 and is the only item left.
-        assertTrue(output.contains("Now you have 1 task(s) in the list."));
+        assertTrue(output.contains("Now you have 1 task(s) in your stash."));
         assertTrue(output.contains("1.[T][ ] b"));
         assertFalse(output.contains("2.[T]"));
     }
@@ -96,7 +96,7 @@ class FinnTest {
                 tempDir.resolve("finn.txt").toString(),
                 "todo read book\ntodo write report\nfind book\nlist\nbye\n");
 
-        assertTrue(output.contains("Here are the matching tasks in your list:"));
+        assertTrue(output.contains("Sniffed them out! Here are your matching tasks:"));
         assertTrue(output.contains("1.[T][ ] read book"));
         // The subsequent full "list" must still show both tasks: find() must not mutate state.
         assertTrue(output.contains("2.[T][ ] write report"));
@@ -112,8 +112,8 @@ class FinnTest {
 
         assertTrue(output.contains("Unknown task type"));
         // If the loop had crashed instead of recovering, these would never print.
-        assertTrue(output.contains("Here are the tasks in your list:"));
-        assertTrue(output.contains("Bye. Hope to see you again soon!"));
+        assertTrue(output.contains("Here is your task stash:"));
+        assertTrue(output.contains("Scampering off! See you next time, task buddy."));
     }
 
     @Test
@@ -124,7 +124,7 @@ class FinnTest {
 
         assertTrue(output.contains("Sorry! Please follow the format: todo DESCRIPTION"));
         assertTrue(output.contains("Sorry! Please follow the format: deadline DESCRIPTION /by DATE"));
-        assertTrue(output.contains("Bye. Hope to see you again soon!"));
+        assertTrue(output.contains("Scampering off! See you next time, task buddy."));
     }
 
     // ---------- run(): end of input without an explicit "bye" ----------
@@ -133,8 +133,8 @@ class FinnTest {
     void run_inputEndsWithoutByeCommand_exitsLoopWithoutGoodbyeMessage() {
         String output = runFinn(tempDir.resolve("finn.txt").toString(), "");
 
-        assertTrue(output.contains("Hello! I'm Finn."));
-        assertFalse(output.contains("Bye. Hope to see you again soon!"));
+        assertTrue(output.contains("Hey there! I'm Pip, your chipmunk task buddy."));
+        assertFalse(output.contains("Scampering off! See you next time, task buddy."));
     }
 
     // ---------- constructor: loading from storage ----------
@@ -153,7 +153,7 @@ class FinnTest {
     void constructor_noExistingStorageFile_startsWithEmptyList() {
         String output = runFinn(tempDir.resolve("brand_new.txt").toString(), "list\nbye\n");
 
-        assertTrue(output.contains("Here are the tasks in your list:"));
+        assertTrue(output.contains("Here is your task stash:"));
         assertFalse(output.contains("[T]"));
         assertFalse(output.contains("Error loading tasks"));
     }
@@ -169,7 +169,7 @@ class FinnTest {
 
         assertTrue(output.contains("Error loading tasks from file. Starting with an empty list."));
         // The app must still be usable afterwards, just with an empty list.
-        assertTrue(output.contains("Here are the tasks in your list:"));
-        assertTrue(output.contains("Bye. Hope to see you again soon!"));
+        assertTrue(output.contains("Here is your task stash:"));
+        assertTrue(output.contains("Scampering off! See you next time, task buddy."));
     }
 }

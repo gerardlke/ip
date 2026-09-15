@@ -1,4 +1,4 @@
-# Finn UI test plan
+# Pip UI test plan
 
 Run this plan with `powershell -NoProfile -ExecutionPolicy Bypass -File .codex/skills/test-ui/scripts/run-ui-tests.ps1`. Expected-output blocks contain the complete program output; the prompt and divider appear on the same line because the application uses `print` for the prompt. A `␠` represents one required trailing space.
 
@@ -21,57 +21,53 @@ b
 Expected output:
 
 ```text
- ____ ___ _   _ _   _␠
-|  __|_ _| \ | | \ | |
-| |_  | ||  \| |  \| |
-|  _| | || |\  | |\  |
-|_|  |___|_| \_|_| \_|
+PIP | Small paws. Big plans.
 ____________________________________________________________
 
-Hello! I'm Finn.
-Your personal AI assistant!
+Hey there! I'm Pip, your chipmunk task buddy.
+Small paws. Big plans. Let's chip away at your tasks!
 ____________________________________________________________
 
-What can I do for you? ____________________________________________________________
+What shall we chip away at? ____________________________________________________________
 
-Got it. I've added this task:
+Acorn secured! I've added this task:
    [T][ ] borrow book
-Now you have 1 task(s) in the list.
+Now you have 1 task(s) in your stash.
 ____________________________________________________________
 
-What can I do for you? ____________________________________________________________
+What shall we chip away at? ____________________________________________________________
 
-Here are the tasks in your list:
+Here is your task stash:
 1.[T][ ] borrow book
 ____________________________________________________________
 
-What can I do for you? ____________________________________________________________
+What shall we chip away at? ____________________________________________________________
 
-Nice! I've marked this task as done:
+Nice nibbling! I've marked this task as done:
 [T][X] borrow book
 ____________________________________________________________
 
-What can I do for you? ____________________________________________________________
+What shall we chip away at? ____________________________________________________________
 
-Here are the tasks in your list:
+Here is your task stash:
 1.[T][X] borrow book
 ____________________________________________________________
 
-What can I do for you? ____________________________________________________________
+What shall we chip away at? ____________________________________________________________
 
-OK, I've marked this task as not done yet:
+Back in the stash! I've marked this task as not done yet:
 [T][ ] borrow book
 ____________________________________________________________
 
-What can I do for you? ____________________________________________________________
+What shall we chip away at? ____________________________________________________________
 
-Here are the tasks in your list:
+Here is your task stash:
 1.[T][ ] borrow book
 ____________________________________________________________
 
-What can I do for you? ____________________________________________________________
+What shall we chip away at? ____________________________________________________________
 
-Bye. Hope to see you again soon!
+Scampering off! See you next time, task buddy.
 
 ```
 
@@ -92,41 +88,37 @@ bye
 Expected output:
 
 ```text
- ____ ___ _   _ _   _␠
-|  __|_ _| \ | | \ | |
-| |_  | ||  \| |  \| |
-|  _| | || |\  | |\  |
-|_|  |___|_| \_|_| \_|
+PIP | Small paws. Big plans.
 ____________________________________________________________
 
-Hello! I'm Finn.
-Your personal AI assistant!
+Hey there! I'm Pip, your chipmunk task buddy.
+Small paws. Big plans. Let's chip away at your tasks!
 ____________________________________________________________
 
-What can I do for you? ____________________________________________________________
+What shall we chip away at? ____________________________________________________________
 
-Got it. I've added this task:
+Acorn secured! I've added this task:
    [D][ ] do homework (by: Oct 15 2019)
-Now you have 1 task(s) in the list.
+Now you have 1 task(s) in your stash.
 ____________________________________________________________
 
-What can I do for you? ____________________________________________________________
+What shall we chip away at? ____________________________________________________________
 
-Got it. I've added this task:
+Acorn secured! I've added this task:
    [E][ ] project meeting (from: Oct 16 2019, to: Oct 17 2019)
-Now you have 2 task(s) in the list.
+Now you have 2 task(s) in your stash.
 ____________________________________________________________
 
-What can I do for you? ____________________________________________________________
+What shall we chip away at? ____________________________________________________________
 
-Here are the tasks in your list:
+Here is your task stash:
 1.[D][ ] do homework (by: Oct 15 2019)
 2.[E][ ] project meeting (from: Oct 16 2019, to: Oct 17 2019)
 ____________________________________________________________
 
-What can I do for you? ____________________________________________________________
+What shall we chip away at? ____________________________________________________________
 
-Bye. Hope to see you again soon!
+Scampering off! See you next time, task buddy.
 
 ```
 
@@ -149,45 +141,41 @@ bye
 Expected output:
 
 ```text
- ____ ___ _   _ _   _␠
-|  __|_ _| \ | | \ | |
-| |_  | ||  \| |  \| |
-|  _| | || |\  | |\  |
-|_|  |___|_| \_|_| \_|
+PIP | Small paws. Big plans.
 ____________________________________________________________
 
-Hello! I'm Finn.
-Your personal AI assistant!
+Hey there! I'm Pip, your chipmunk task buddy.
+Small paws. Big plans. Let's chip away at your tasks!
 ____________________________________________________________
 
-What can I do for you? ____________________________________________________________
+What shall we chip away at? ____________________________________________________________
 
 Sorry! Please follow the format: todo DESCRIPTION
 ____________________________________________________________
 
-What can I do for you? ____________________________________________________________
+What shall we chip away at? ____________________________________________________________
 
 Sorry! Please follow the format: deadline DESCRIPTION /by DATE
 ____________________________________________________________
 
-What can I do for you? ____________________________________________________________
+What shall we chip away at? ____________________________________________________________
 
 Sorry! Please follow the format: event DESCRIPTION /from START /to END
 ____________________________________________________________
 
-What can I do for you? ____________________________________________________________
+What shall we chip away at? ____________________________________________________________
 
 Sorry! Invalid task index!
 ____________________________________________________________
 
-What can I do for you? ____________________________________________________________
+What shall we chip away at? ____________________________________________________________
 
 Sorry! Unknown task type: remind
 ____________________________________________________________
 
-What can I do for you? ____________________________________________________________
+What shall we chip away at? ____________________________________________________________
 
-Bye. Hope to see you again soon!
+Scampering off! See you next time, task buddy.
 
 ```
 
@@ -210,52 +198,48 @@ bye
 Expected output:
 
 ```text
- ____ ___ _   _ _   _␠
-|  __|_ _| \ | | \ | |
-| |_  | ||  \| |  \| |
-|  _| | || |\  | |\  |
-|_|  |___|_| \_|_| \_|
+PIP | Small paws. Big plans.
 ____________________________________________________________
 
-Hello! I'm Finn.
-Your personal AI assistant!
+Hey there! I'm Pip, your chipmunk task buddy.
+Small paws. Big plans. Let's chip away at your tasks!
 ____________________________________________________________
 
-What can I do for you? ____________________________________________________________
+What shall we chip away at? ____________________________________________________________
 
-Got it. I've added this task:
+Acorn secured! I've added this task:
    [T][ ] first task
-Now you have 1 task(s) in the list.
+Now you have 1 task(s) in your stash.
 ____________________________________________________________
 
-What can I do for you? ____________________________________________________________
+What shall we chip away at? ____________________________________________________________
 
-Got it. I've added this task:
+Acorn secured! I've added this task:
    [T][ ] second task
-Now you have 2 task(s) in the list.
+Now you have 2 task(s) in your stash.
 ____________________________________________________________
 
-What can I do for you? ____________________________________________________________
+What shall we chip away at? ____________________________________________________________
 
-Oops! I've removed this task:
+Cleared from the stash! I've removed this task:
    [T][ ] first task
-Now you have 1 task(s) in the list.
+Now you have 1 task(s) in your stash.
 ____________________________________________________________
 
-What can I do for you? ____________________________________________________________
+What shall we chip away at? ____________________________________________________________
 
-Here are the tasks in your list:
+Here is your task stash:
 1.[T][ ] second task
 ____________________________________________________________
 
-What can I do for you? ____________________________________________________________
+What shall we chip away at? ____________________________________________________________
 
 Sorry! Invalid task index!
 ____________________________________________________________
 
-What can I do for you? ____________________________________________________________
+What shall we chip away at? ____________________________________________________________
 
-Bye. Hope to see you again soon!
+Scampering off! See you next time, task buddy.
 
 ```
 
@@ -287,28 +271,24 @@ bye
 Expected output:
 
 ```text
- ____ ___ _   _ _   _␠
-|  __|_ _| \ | | \ | |
-| |_  | ||  \| |  \| |
-|  _| | || |\  | |\  |
-|_|  |___|_| \_|_| \_|
+PIP | Small paws. Big plans.
 ____________________________________________________________
 
-Hello! I'm Finn.
-Your personal AI assistant!
+Hey there! I'm Pip, your chipmunk task buddy.
+Small paws. Big plans. Let's chip away at your tasks!
 ____________________________________________________________
 
-What can I do for you? ____________________________________________________________
+What shall we chip away at? ____________________________________________________________
 
-Here are the tasks in your list:
+Here is your task stash:
 1.[T][ ] read book
 2.[D][X] return book (by: Jun 06 2019)
 3.[E][ ] project meeting (from: Aug 06 2019, to: Aug 07 2019)
 ____________________________________________________________
 
-What can I do for you? ____________________________________________________________
+What shall we chip away at? ____________________________________________________________
 
-Bye. Hope to see you again soon!
+Scampering off! See you next time, task buddy.
 
 ```
 
@@ -338,82 +318,78 @@ bye
 Expected output:
 
 ```text
- ____ ___ _   _ _   _␠
-|  __|_ _| \ | | \ | |
-| |_  | ||  \| |  \| |
-|  _| | || |\  | |\  |
-|_|  |___|_| \_|_| \_|
+PIP | Small paws. Big plans.
 ____________________________________________________________
 
-Hello! I'm Finn.
-Your personal AI assistant!
+Hey there! I'm Pip, your chipmunk task buddy.
+Small paws. Big plans. Let's chip away at your tasks!
 ____________________________________________________________
 
-What can I do for you? ____________________________________________________________
+What shall we chip away at? ____________________________________________________________
 
 Sorry! Please enter a command.
 ____________________________________________________________
 
-What can I do for you? ____________________________________________________________
+What shall we chip away at? ____________________________________________________________
 
-Got it. I've added this task:
+Acorn secured! I've added this task:
    [T][ ] one task
-Now you have 1 task(s) in the list.
+Now you have 1 task(s) in your stash.
 ____________________________________________________________
 
-What can I do for you? ____________________________________________________________
+What shall we chip away at? ____________________________________________________________
 
 Sorry! Invalid task index!
 ____________________________________________________________
 
-What can I do for you? ____________________________________________________________
+What shall we chip away at? ____________________________________________________________
 
 Sorry! Invalid task index!
 ____________________________________________________________
 
-What can I do for you? ____________________________________________________________
+What shall we chip away at? ____________________________________________________________
 
 Sorry! Invalid task index!
 ____________________________________________________________
 
-What can I do for you? ____________________________________________________________
+What shall we chip away at? ____________________________________________________________
 
 Sorry! Please follow the format: deadline DESCRIPTION /by DATE
 ____________________________________________________________
 
-What can I do for you? ____________________________________________________________
+What shall we chip away at? ____________________________________________________________
 
 Sorry! Please use a valid date in the format yyyy-MM-dd.
 ____________________________________________________________
 
-What can I do for you? ____________________________________________________________
+What shall we chip away at? ____________________________________________________________
 
 Sorry! Please follow the format: event DESCRIPTION /from START /to END
 ____________________________________________________________
 
-What can I do for you? ____________________________________________________________
+What shall we chip away at? ____________________________________________________________
 
 Sorry! Please use valid dates in the format yyyy-MM-dd.
 ____________________________________________________________
 
-What can I do for you? ____________________________________________________________
+What shall we chip away at? ____________________________________________________________
 
 Sorry! The event end date must not be before its start date.
 ____________________________________________________________
 
-What can I do for you? ____________________________________________________________
+What shall we chip away at? ____________________________________________________________
 
 Sorry! Please follow the format: list
 ____________________________________________________________
 
-What can I do for you? ____________________________________________________________
+What shall we chip away at? ____________________________________________________________
 
 Sorry! Please follow the format: bye
 ____________________________________________________________
 
-What can I do for you? ____________________________________________________________
+What shall we chip away at? ____________________________________________________________
 
-Bye. Hope to see you again soon!
+Scampering off! See you next time, task buddy.
 
 ```
 
@@ -434,40 +410,36 @@ bye
 Expected output:
 
 ```text
- ____ ___ _   _ _   _␠
-|  __|_ _| \ | | \ | |
-| |_  | ||  \| |  \| |
-|  _| | || |\  | |\  |
-|_|  |___|_| \_|_| \_|
+PIP | Small paws. Big plans.
 ____________________________________________________________
 
-Hello! I'm Finn.
-Your personal AI assistant!
+Hey there! I'm Pip, your chipmunk task buddy.
+Small paws. Big plans. Let's chip away at your tasks!
 ____________________________________________________________
 
-What can I do for you? ____________________________________________________________
+What shall we chip away at? ____________________________________________________________
 
-Got it. I've added this task:
+Acorn secured! I've added this task:
    [T][ ] save this task
-Now you have 1 task(s) in the list.
+Now you have 1 task(s) in your stash.
 ____________________________________________________________
 
-What can I do for you? ____________________________________________________________
+What shall we chip away at? ____________________________________________________________
 
-Nice! I've marked this task as done:
+Nice nibbling! I've marked this task as done:
 [T][X] save this task
 ____________________________________________________________
 
-What can I do for you? ____________________________________________________________
+What shall we chip away at? ____________________________________________________________
 
-Oops! I've removed this task:
+Cleared from the stash! I've removed this task:
    [T][X] save this task
-Now you have 0 task(s) in the list.
+Now you have 0 task(s) in your stash.
 ____________________________________________________________
 
-What can I do for you? ____________________________________________________________
+What shall we chip away at? ____________________________________________________________
 
-Bye. Hope to see you again soon!
+Scampering off! See you next time, task buddy.
 
 ```
 
@@ -480,3 +452,48 @@ Bye. Hope to see you again soon!
 - Scroll up through a long conversation, then send a command: the newest response becomes visible.
 - User avatar: check that DaUser.jpg appears as a 28px circle to the right of each user bubble, without stretching or clipping message text at the minimum window width.
 - Avatar consistency: Finn replies and the top bar show DaFinn.png with the same 28px circular crop as the user avatar; the top bar no longer shows an F placeholder.
+
+## Test: Woodland command aliases
+
+Aim: Verify Pip's greeting and woodland aliases for adding, listing, finding, and exiting.
+
+Inputs:
+```text
+gather collect acorns
+stash
+sniff acorns
+scamper
+```
+
+Expected output:
+```text
+PIP | Small paws. Big plans.
+____________________________________________________________
+
+Hey there! I'm Pip, your chipmunk task buddy.
+Small paws. Big plans. Let's chip away at your tasks!
+____________________________________________________________
+
+What shall we chip away at? ____________________________________________________________
+
+Acorn secured! I've added this task:
+    [T][ ] collect acorns
+Now you have 1 task(s) in your stash.
+____________________________________________________________
+
+What shall we chip away at? ____________________________________________________________
+
+Here is your task stash:
+1.[T][ ] collect acorns
+____________________________________________________________
+
+What shall we chip away at? ____________________________________________________________
+
+Sniffed them out! Here are your matching tasks:
+1.[T][ ] collect acorns
+____________________________________________________________
+
+What shall we chip away at? ____________________________________________________________
+
+Scampering off! See you next time, task buddy.
+```

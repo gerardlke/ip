@@ -40,6 +40,10 @@ public class Parser {
             "dl", "deadline",
             "e", "event");
 
+    /** Optional woodland aliases; the original command names and short aliases remain valid. */
+    private static final Map<String, String> WOODLAND_ALIASES = Map.of(
+            "gather", "todo", "stash", "list", "sniff", "find", "scamper", "bye");
+
     /**
      * Parses one line of user input into a {@link Command}.
      *
@@ -58,6 +62,7 @@ public class Parser {
         assert parts.length >= 1 : "A non-empty command must have a command word";
         String commandWord = parts[0].toLowerCase();
         commandWord = COMMAND_ALIASES.getOrDefault(commandWord, commandWord);
+        commandWord = WOODLAND_ALIASES.getOrDefault(commandWord, commandWord);
         String arguments = parts.length > 1 ? parts[1].trim() : "";
 
         return parseCommand(commandWord, arguments);
