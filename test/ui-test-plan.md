@@ -497,3 +497,5 @@ What shall we chip away at? ____________________________________________________
 
 Scampering off! See you next time, task buddy.
 ```
+- Startup error: use an unreadable data/Finn.txt in an isolated working folder; the GUI shows the loading warning after the greeting and remains usable. Missing files start empty without an error.
+- Save error: make the data path unwritable; a task change produces a highlighted message explaining that it is in memory only. Restore write access and verify a subsequent task change saves the stash.

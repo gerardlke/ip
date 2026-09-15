@@ -32,6 +32,34 @@ import org.junit.jupiter.api.io.TempDir;
  * a storage read failure.
  */
 class FinnTest {
+    /** GUI requests recover after invalid commands and report persistence failures without crashing. */
+    @Test
+    void getResponse_errorsAreReportedAndNextCommandStillWorks() throws Exception {
+        Finn app = new Finn(tempDir.resolve("missing/tasks.txt").toString());
+        assertTrue(app.getStartupWarning().isEmpty());
+        assertTrue(app.getResponse("mark 1").contains("Invalid task index"));
+        assertTrue(app.isResponseError());
+        app.getResponse("list");
+        assertFalse(app.isResponseError());
+
+        Path blockedParent = tempDir.resolve("blocked");
+        Files.writeString(blockedParent, "This is a file, not a directory.");
+        Finn blockedApp = new Finn(blockedParent.resolve("tasks.txt").toString());
+        assertTrue(blockedApp.getResponse("todo read book").contains("couldn't save your tasks"));
+        assertTrue(blockedApp.isResponseError());
+        assertTrue(blockedApp.getResponse("list").contains("read book"));
+        assertFalse(blockedApp.isResponseError());
+    }
+
+    /** Loading warnings remain available for the GUI before any command is entered. */
+    @Test
+    void getStartupWarning_corruptFile_exposesWarningToGui() throws Exception {
+        Path corrupt = tempDir.resolve("invalid.txt");
+        Files.write(corrupt, new byte[] {(byte) 0x80});
+        Finn app = new Finn(corrupt.toString());
+        assertTrue(app.getStartupWarning().contains("Error loading tasks"));
+    }
+
 
     @TempDir
     Path tempDir;

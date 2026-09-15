@@ -229,7 +229,7 @@ class CommandTest {
         @Test
         void execute_printsGoodbyeAndDoesNotThrow() {
             new ExitCommand().execute(new TaskList(), ui, storage);
-            assertTrue(capturedOut.toString().contains("Bye"));
+            assertTrue(capturedOut.toString().contains("Scampering off! See you next time, task buddy."));
         }
     }
 }

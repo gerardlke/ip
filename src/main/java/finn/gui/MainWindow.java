@@ -44,6 +44,9 @@ public class MainWindow {
                 "Hey there! I'm Pip, your chipmunk task buddy.\n"
                         + "Small paws. Big plans. Let's chip away at your tasks!\n\n"
                         + "Try gather read a book, stash, or sniff book.", false));
+        if (!finn.getStartupWarning().isEmpty()) {
+            dialogContainer.getChildren().add(DialogBox.getFinnDialog(finn.getStartupWarning(), true));
+        }
     }
 
     /**
