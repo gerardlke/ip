@@ -56,7 +56,7 @@ test {
 }
 
 application {
-    mainClass = 'finn.gui.Launcher'
+    mainClass = 'pip.gui.Launcher'
 }
 
 java {
@@ -73,7 +73,7 @@ jar {
 }
 
 shadowJar {
-    archiveFileName = 'finn.jar'
+    archiveFileName = 'pip.jar'
 }
 
 run {

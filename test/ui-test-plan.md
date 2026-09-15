@@ -1,6 +1,6 @@
 # Pip UI test plan
 
-Run this plan with `powershell -NoProfile -ExecutionPolicy Bypass -File .codex/skills/test-ui/scripts/run-ui-tests.ps1`. Expected-output blocks contain the complete program output; the prompt and divider appear on the same line because the application uses `print` for the prompt. A `␠` represents one required trailing space.
+Run this plan with `powershell -NoProfile -ExecutionPolicy Bypass -File .codex/skills/test-ui/scripts/run-ui-tests.ps1`. Expected-output blocks contain the complete program output; the prompt and divider appear on the same line because the application uses `print` for the prompt. A `â ` represents one required trailing space.
 
 ## Test: Todo lifecycle
 
@@ -245,7 +245,7 @@ Scampering off! See you next time, task buddy.
 
 ## Test: Load saved tasks
 
-Aim: Verify that Finn loads valid todo, deadline, and event records while safely ignoring malformed saved records.
+Aim: Verify that Pip loads valid todo, deadline, and event records while safely ignoring malformed saved records.
 
 Saved tasks:
 
@@ -294,7 +294,7 @@ Scampering off! See you next time, task buddy.
 
 ## Test: Invalid input edge cases
 
-Aim: Verify that blank input, invalid task indexes, incomplete task details, and commands with unexpected arguments show guidance without terminating Finn.
+Aim: Verify that blank input, invalid task indexes, incomplete task details, and commands with unexpected arguments show guidance without terminating Pip.
 
 Inputs:
 
@@ -445,13 +445,13 @@ Scampering off! See you next time, task buddy.
 
 ## GUI appearance checks (manual)
 
-- At 380 � 360 and 520 � 680, and when enlarged, check that long commands and replies wrap without horizontal scrolling and the composer stays visible.
-- Send `list`: the user message has a right-aligned neutral bubble; Finn has a 28px circular DaFinn.png avatar and a wide, plain reply.
+- At 380 × 360 and 520 × 680, and when enlarged, check that long commands and replies wrap without horizontal scrolling and the composer stays visible.
+- Send `list`: the user message has a right-aligned neutral bubble; Pip has a 28px circular DaPip.png avatar and a wide, plain reply.
 - Send `unknown`: the reply has a red accent, tinted background, and a Command error label. Send `list` again: normal styling returns.
 - Check that blank input disables Send, Enter submits a command, and keyboard focus returns to the input after clicking Send.
 - Scroll up through a long conversation, then send a command: the newest response becomes visible.
 - User avatar: check that DaUser.jpg appears as a 28px circle to the right of each user bubble, without stretching or clipping message text at the minimum window width.
-- Avatar consistency: Finn replies and the top bar show DaFinn.png with the same 28px circular crop as the user avatar; the top bar no longer shows an F placeholder.
+- Avatar consistency: Pip replies and the top bar show DaPip.png with the same 28px circular crop as the user avatar; the top bar no longer shows an F placeholder.
 
 ## Test: Woodland command aliases
 
@@ -497,5 +497,5 @@ What shall we chip away at? ____________________________________________________
 
 Scampering off! See you next time, task buddy.
 ```
-- Startup error: use an unreadable data/Finn.txt in an isolated working folder; the GUI shows the loading warning after the greeting and remains usable. Missing files start empty without an error.
+- Startup error: use an unreadable data/Pip.txt in an isolated working folder; the GUI shows the loading warning after the greeting and remains usable. Missing files start empty without an error.
 - Save error: make the data path unwritable; a task change produces a highlighted message explaining that it is in memory only. Restore write access and verify a subsequent task change saves the stash.

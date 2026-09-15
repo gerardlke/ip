@@ -3,7 +3,7 @@
 <?import javafx.scene.layout.*?>
 <AnchorPane prefHeight="680" prefWidth="520" stylesheets="@../css/main.css"
             xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="finn.gui.MainWindow">
+            fx:controller="pip.gui.MainWindow">
     <VBox AnchorPane.topAnchor="0" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0"
           AnchorPane.rightAnchor="0">
         <HBox fx:id="header" styleClass="header" alignment="CENTER_LEFT" spacing="10">

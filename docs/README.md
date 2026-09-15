@@ -104,9 +104,12 @@ For example, `gather read a book` works just like `todo read a book`.
 
 ## Saving and recovering your tasks
 
-Pip automatically saves task changes to `data/Finn.txt` in the folder from which you
-launch it. The filename is retained for compatibility. Always launch from the same
+Pip automatically saves task changes to `data/Pip.txt` in the folder from which you
+launch it. Always launch from the same
 folder; copy the `data` folder too if you move the app.
+
+Upgrading an older installation? Back up its task file, then rename it to `Pip.txt`
+inside the `data` folder before starting Pip. Do not overwrite an existing stash.
 
 | Problem | What to do |
 | --- | --- |

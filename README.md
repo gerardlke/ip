@@ -1,4 +1,4 @@
-﻿# Pip - your chipmunk task buddy
+# Pip - your chipmunk task buddy
 
 Small paws. Big plans. Pip helps you gather tasks, find them in your stash,
 and chip away at your day with cheerful woodland encouragement.
@@ -6,8 +6,9 @@ and chip away at your day with cheerful woodland encouragement.
 ## Run
 
 Use Java 25. Run `./gradlew run` (Windows: `./gradlew.bat run`), or launch
-`finn.gui.Launcher` in your IDE. The internal `finn` package and existing
-`data/Finn.txt` storage path are retained so saved tasks remain available.
+`pip.gui.Launcher` in your IDE. Tasks are saved to `data/Pip.txt`.
+If upgrading an older installation, back up its task file and rename it to
+`Pip.txt` inside the `data` folder before starting Pip.
 
 ## Commands
 

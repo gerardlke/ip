@@ -1,11 +1,11 @@
 ---
 name: test-ui
-description: Run Finn console UI regression tests recorded in test/ui-test-plan.md after Java code changes that affect commands or displayed output.
+description: Run Pip console UI regression tests recorded in test/ui-test-plan.md after Java code changes that affect commands or displayed output.
 ---
 
 # Test UI
 
-Use this skill after updating Finn's command parsing, task behaviour, or console messages.
+Use this skill after updating Pip's command parsing, task behaviour, or console messages.
 
 1. Update `test/ui-test-plan.md` whenever the supported command syntax or expected console output changes. Each test must have an aim, an `Inputs` block, and an `Expected output` block.
 2. Run `powershell -NoProfile -ExecutionPolicy Bypass -File .codex/skills/test-ui/scripts/run-ui-tests.ps1` from the repository root. The per-process execution-policy bypass lets the project runner execute without changing the user's PowerShell settings. It compiles all source files with Java 25, runs each test session, prints a console transcript, and compares the complete program output to the plan.

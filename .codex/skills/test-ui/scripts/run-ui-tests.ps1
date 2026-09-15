@@ -17,7 +17,7 @@ if ($sourceFiles.Count -eq 0) {
     throw "No Java source files found in src/main/java."
 }
 
-$classesDirectory = Join-Path $env:TEMP "finn-ui-test-$PID"
+$classesDirectory = Join-Path $env:TEMP "pip-ui-test-$PID"
 New-Item -ItemType Directory -Path $classesDirectory | Out-Null
 
 try {
@@ -46,7 +46,7 @@ try {
         }
         # The plan uses <SP> to represent a required trailing space without adding whitespace to Markdown lines.
         $expected = (Normalize-Output $test.Groups['expected'].Value).Replace("<SP>", " ").Replace("␠", " ")
-        $actual = Normalize-Output (($inputs | & java "-Dfinn.storage.path=$storagePath" -cp $classesDirectory Finn 2>&1 | Out-String))
+        $actual = Normalize-Output (($inputs | & java "-Dpip.storage.path=$storagePath" -cp $classesDirectory pip.Pip 2>&1 | Out-String))
 
         Write-Host "`n=== $name ==="
         Write-Host "Aim: $($test.Groups['aim'].Value.Trim())"
