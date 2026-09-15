@@ -27,7 +27,7 @@ public class Main extends Application {
             AnchorPane root = loader.load();
             loader.<MainWindow>getController().setFinn(new Finn("./data/Finn.txt"));
             stage.setScene(new Scene(root));
-            stage.setTitle("Finn");
+            stage.setTitle("Pip | Your task stash");
             stage.setMinWidth(380);
             stage.setMinHeight(360);
             stage.setResizable(true);

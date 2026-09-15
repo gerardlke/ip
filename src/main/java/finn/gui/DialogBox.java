@@ -43,7 +43,7 @@ public class DialogBox extends HBox {
             throw new RuntimeException("Unable to load dialog box", e);
         }
         dialog.setText(text);
-        speaker.setText(error ? "Finn · Command error" : "Finn");
+        speaker.setText(error ? "Pip · Aw, nuts! Command error" : "Pip");
         speaker.setVisible(!user);
         speaker.setManaged(!user);
         if (user) {
@@ -91,7 +91,7 @@ public class DialogBox extends HBox {
      * @return A fresh image view for a chat row or the window header.
      */
     static ImageView createFinnAvatar() {
-        return createAvatar(FINN_IMAGE, "Finn's profile picture");
+        return createAvatar(FINN_IMAGE, "Pip's profile picture");
     }
 
     /**

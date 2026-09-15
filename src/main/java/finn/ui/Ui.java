@@ -21,13 +21,9 @@ public class Ui {
 
     /** Displays Finn's opening banner and greeting. */
     public void showWelcome() {
-        String banner = " ____ ___ _   _ _   _ \n"
-                + "|  __|_ _| \\ | | \\ | |\n"
-                + "| |_  | ||  \\| |  \\| |\n"
-                + "|  _| | || |\\  | |\\  |\n"
-                + "|_|  |___|_| \\_|_| \\_|\n";
+        String banner = "PIP | Small paws. Big plans.\n";
         System.out.println(banner + BREAKLINE);
-        System.out.println("Hello! I'm Finn.\nYour personal AI assistant!\n" + BREAKLINE);
+        System.out.println("Hey there! I'm Pip, your chipmunk task buddy.\nSmall paws. Big plans. Let's chip away at your tasks!\n" + BREAKLINE);
     }
 
     /**
@@ -36,7 +32,7 @@ public class Ui {
      * @return The command text, or null when input has ended.
      */
     public String readCommand() {
-        System.out.print("What can I do for you? ");
+        System.out.print("What shall we chip away at? ");
         if (!scanner.hasNextLine()) {
             return null;
         }
@@ -51,7 +47,7 @@ public class Ui {
      * @param tasks The tasks to display in list order.
      */
     public void showTaskList(TaskList tasks) {
-        showTasks(tasks, "Here are the tasks in your list:\n");
+        showTasks(tasks, "Here is your task stash:\n");
     }
 
     /**
@@ -60,7 +56,7 @@ public class Ui {
      * @param matchingTasks The search results to display.
      */
     public void showMatchingTasks(TaskList matchingTasks) {
-        showTasks(matchingTasks, "Here are the matching tasks in your list:\n");
+        showTasks(matchingTasks, "Sniffed them out! Here are your matching tasks:\n");
     }
 
     /** Builds and displays a task list with the supplied heading. */
@@ -82,7 +78,7 @@ public class Ui {
      */
     public void showTaskAdded(Task task, int taskCount) {
         lastResponse = String.format(
-                "Got it. I've added this task:\n    %s\nNow you have %d task(s) in the list.", task, taskCount);
+                "Acorn secured! I've added this task:\n    %s\nNow you have %d task(s) in your stash.", task, taskCount);
         System.out.println(lastResponse);
         System.out.println(BREAKLINE);
     }
@@ -95,8 +91,8 @@ public class Ui {
      */
     public void showTaskMarked(Task task, boolean completed) {
         lastResponse = completed
-                ? String.format("Nice! I've marked this task as done:\n    %s", task)
-                : String.format("OK, I've marked this task as not done yet:\n    %s", task);
+                ? String.format("Nice nibbling! I've marked this task as done:\n    %s", task)
+                : String.format("Back in the stash! I've marked this task as not done yet:\n    %s", task);
         System.out.println(lastResponse);
         System.out.println(BREAKLINE);
     }
@@ -109,7 +105,7 @@ public class Ui {
      */
     public void showTaskDeleted(Task task, int taskCount) {
         lastResponse = String.format(
-                "Oops! I've removed this task:\n    %s\nNow you have %d task(s) in the list.", task, taskCount);
+                "Cleared from the stash! I've removed this task:\n    %s\nNow you have %d task(s) in your stash.", task, taskCount);
         System.out.println(lastResponse);
         System.out.println(BREAKLINE);
     }
@@ -127,7 +123,7 @@ public class Ui {
 
     /** Shows Finn's farewell. */
     public void showGoodbye() {
-        lastResponse = "Bye. Hope to see you again soon!";
+        lastResponse = "Scampering off! See you next time, task buddy.";
         System.out.println(lastResponse);
     }
 
