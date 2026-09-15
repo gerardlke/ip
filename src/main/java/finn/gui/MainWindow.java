@@ -1,32 +1,52 @@
 package finn.gui;
 
 import finn.Finn;
+import javafx.application.Platform;
+import javafx.beans.binding.Bindings;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
-import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
 /** Controller for Finn's main JavaFX window. */
-public class MainWindow extends AnchorPane {
+public class MainWindow {
+    @FXML private HBox header;
     @FXML private ScrollPane scrollPane;
     @FXML private VBox dialogContainer;
     @FXML private TextField userInput;
+    @FXML private Button sendButton;
     private Finn finn;
-    private final Image userImage = new Image(getClass().getResourceAsStream("/images/DaUser.jpg"));
-    private final Image finnImage = new Image(getClass().getResourceAsStream("/images/DaDuke.png"));
 
+    /** Creates the controller; FXMLLoader injects controls before calling initialize. */
+    public MainWindow() {
+    }
+
+    /** Configures input bindings after FXML injection and requests focus once the scene is ready. */
     @FXML
     public void initialize() {
-        scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        header.getChildren().add(0, DialogBox.createFinnAvatar());
+        sendButton.disableProperty().bind(Bindings.createBooleanBinding(
+                () -> userInput.getText().isBlank(), userInput.textProperty()));
+        Platform.runLater(userInput::requestFocus);
     }
 
+    /**
+     * Connects the command processor and adds the opening greeting.
+     * Called once by the application after loading the FXML, before accepting input.
+     *
+     * @param finn The command processor used for this window's conversation.
+     */
     public void setFinn(Finn finn) {
         this.finn = finn;
-        dialogContainer.getChildren().add(DialogBox.getFinnDialog("Hello! I'm Finn. How can I help?", finnImage));
+        dialogContainer.getChildren().add(DialogBox.getFinnDialog("Hello! I'm Finn. How can I help?", false));
     }
 
+    /**
+     * Processes a nonblank command and appends both messages with the response's error status.
+     * Restores input focus and scrolls after layout so the latest reply is visible.
+     */
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
@@ -34,8 +54,15 @@ public class MainWindow extends AnchorPane {
             return;
         }
         String response = finn.getResponse(input);
-        dialogContainer.getChildren().addAll(DialogBox.getUserDialog(input, userImage),
-                DialogBox.getFinnDialog(response, finnImage));
+        dialogContainer.getChildren().addAll(DialogBox.getUserDialog(input),
+                DialogBox.getFinnDialog(response, finn.isResponseError()));
         userInput.clear();
+        userInput.requestFocus();
+        // The new rows must be laid out before the scroll position can reach their bottom edge.
+        Platform.runLater(() -> {
+            scrollPane.applyCss();
+            scrollPane.layout();
+            scrollPane.setVvalue(1.0);
+        });
     }
 }

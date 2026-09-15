@@ -30,7 +30,11 @@ public class Ui {
         System.out.println("Hello! I'm Finn.\nYour personal AI assistant!\n" + BREAKLINE);
     }
 
-    /** Reads one trimmed command, or returns null when input has ended. */
+    /**
+     * Reads one trimmed command.
+     *
+     * @return The command text, or null when input has ended.
+     */
     public String readCommand() {
         System.out.print("What can I do for you? ");
         if (!scanner.hasNextLine()) {
@@ -41,12 +45,20 @@ public class Ui {
         return input;
     }
 
-    /** Shows the current task list. */
+    /**
+     * Shows the current task list.
+     *
+     * @param tasks The tasks to display in list order.
+     */
     public void showTaskList(TaskList tasks) {
         showTasks(tasks, "Here are the tasks in your list:\n");
     }
 
-    /** Shows the tasks matching a search keyword. */
+    /**
+     * Shows the tasks matching a search keyword.
+     *
+     * @param matchingTasks The search results to display.
+     */
     public void showMatchingTasks(TaskList matchingTasks) {
         showTasks(matchingTasks, "Here are the matching tasks in your list:\n");
     }
@@ -62,7 +74,12 @@ public class Ui {
         System.out.println(BREAKLINE);
     }
 
-    /** Shows confirmation that a task was added. */
+    /**
+     * Shows confirmation that a task was added.
+     *
+     * @param task The newly added task.
+     * @param taskCount The total number of tasks after adding it.
+     */
     public void showTaskAdded(Task task, int taskCount) {
         lastResponse = String.format(
                 "Got it. I've added this task:\n    %s\nNow you have %d task(s) in the list.", task, taskCount);
@@ -70,7 +87,12 @@ public class Ui {
         System.out.println(BREAKLINE);
     }
 
-    /** Shows confirmation that a task's completion state changed. */
+    /**
+     * Shows confirmation that a task's completion state changed.
+     *
+     * @param task The updated task.
+     * @param completed Whether the task is now complete.
+     */
     public void showTaskMarked(Task task, boolean completed) {
         lastResponse = completed
                 ? String.format("Nice! I've marked this task as done:\n    %s", task)
@@ -79,7 +101,12 @@ public class Ui {
         System.out.println(BREAKLINE);
     }
 
-    /** Shows confirmation that a task was removed. */
+    /**
+     * Shows confirmation that a task was removed.
+     *
+     * @param task The removed task.
+     * @param taskCount The number of remaining tasks.
+     */
     public void showTaskDeleted(Task task, int taskCount) {
         lastResponse = String.format(
                 "Oops! I've removed this task:\n    %s\nNow you have %d task(s) in the list.", task, taskCount);
@@ -87,7 +114,11 @@ public class Ui {
         System.out.println(BREAKLINE);
     }
 
-    /** Shows an error message with the standard divider. */
+    /**
+     * Shows an error message with the standard divider.
+     *
+     * @param message The error explanation to display.
+     */
     public void showError(String message) {
         lastResponse = message;
         System.out.println(message);
@@ -100,7 +131,11 @@ public class Ui {
         System.out.println(lastResponse);
     }
 
-    /** Returns the latest message produced by this UI. */
+    /**
+     * Returns the latest command response produced by this UI, without console dividers.
+     *
+     * @return The response text, or an empty string before any command response.
+     */
     public String getLastResponse() {
         return lastResponse;
     }
